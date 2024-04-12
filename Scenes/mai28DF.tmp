@@ -1,0 +1,109 @@
+[gd_scene load_steps=4 format=3 uid="uid://662t41l4s3d3"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuScript.gd" id="1_khv63"]
+[ext_resource type="Theme" uid="uid://da5nolxjbph02" path="res://ui_theme.tres" id="1_ma1bl"]
+[ext_resource type="PackedScene" uid="uid://d3x2t7bdi076b" path="res://Prefabs/options_menu.tscn" id="4_d4eeu"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_khv63")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -4999.0
+offset_top = -4999.0
+offset_right = 5000.0
+offset_bottom = 5000.0
+color = Color(0, 0, 0, 1)
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 199.999
+offset_bottom = 82.0
+grow_horizontal = 2
+pivot_offset = Vector2(200, 41)
+theme = ExtResource("1_ma1bl")
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[center]Game Title"
+scroll_active = false
+
+[node name="start" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -34.0
+offset_right = 70.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("1_ma1bl")
+theme_override_font_sizes/font_size = 24
+text = "Start"
+
+[node name="options" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 24.0
+offset_right = 70.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("1_ma1bl")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 84.0
+offset_right = 70.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("1_ma1bl")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="options_bg" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -4999.0
+offset_top = -4999.0
+offset_right = 5000.0
+offset_bottom = 5000.0
+color = Color(0, 0, 0, 1)
+
+[node name="options_menu" parent="." instance=ExtResource("4_d4eeu")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

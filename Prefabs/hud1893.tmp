@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo153vm1kdfnp"]
+
+[ext_resource type="Texture2D" uid="uid://cgsjitl6iikqp" path="res://Textures/reticle.png" id="1_bfx0v"]
+[ext_resource type="Theme" uid="uid://da5nolxjbph02" path="res://ui_theme.tres" id="2_8a2yb"]
+[ext_resource type="Script" path="res://Scripts/RadarScript.gd" id="3_22cfi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwv4s"]
+bg_color = Color(0.572549, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32vxx"]
+bg_color = Color(0.78125, 0.09375, 0.09375, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="HUD" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="in-game" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 288.0
+mouse_filter = 2
+theme = ExtResource("2_8a2yb")
+
+[node name="reticle" type="TextureRect" parent="in-game"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_bfx0v")
+stretch_mode = 3
+
+[node name="healthbar" type="ProgressBar" parent="in-game"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 190.0
+grow_vertical = 0
+theme = ExtResource("2_8a2yb")
+theme_override_styles/background = SubResource("StyleBoxFlat_xwv4s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_32vxx")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="score" type="RichTextLabel" parent="in-game"]
+offset_right = 250.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(0.777344, 0.09375, 0.09375, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "Score: 0"
+
+[node name="radar" type="Control" parent="in-game"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_bottom = 120.0
+grow_horizontal = 0
+pivot_offset = Vector2(60, 60)
+script = ExtResource("3_22cfi")
+
+[node name="dead" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 288.0
+theme = ExtResource("2_8a2yb")
+
+[node name="you died" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -114.0
+offset_right = 200.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 40)
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]YOU DIED"
+scroll_active = false
+
+[node name="score" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -28.0
+offset_right = 125.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 20)
+theme_override_colors/default_color = Color(0.777344, 0.09375, 0.09375, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Score: 0"
+scroll_active = false
+
+[node name="retry" type="Button" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = 30.0
+offset_right = 65.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(65, 25)
+theme_override_font_sizes/font_size = 31
+text = "Retry"
+
+[node name="quit" type="Button" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = 87.0
+offset_right = 65.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(65, 25)
+theme_override_font_sizes/font_size = 31
+text = "Quit"

@@ -15,3 +15,10 @@ Decay: your character (health?) decays and must be maintained, encourage player 
 Collapse: navigate falling structure like cosmic fall from shadow the hedgehog
 Mutation: ace combat but you can mutate your plane in unusual ways, like longer wings, under/oversized parts, impossible maneuvers
 You don't play as the main character: release enemies to stop the hero before eventually facing them as the final boss
+
+general concepts and their practicality:
+ace combat: [eh maybe not] movement, missiles, and interp should be no problem, question of player models, enemies, and environment design and how much of a timesink that would be on top of the upgrade/mutation concept
+fps: I'd prefer another genre, since I did this last time; however, a first-person game doesn't have to be a shooter primarily
+platformer: very versatile, could work for just about any theme, maybe the most managable scope?
+tower defense/stop the hero: not as directly interactive for the player, but for certain themes I think it's a good fit
+fighting game: would have to be simple or it'd be highly impractical, movement & combat mechanics could be time consuming; could be interesting as a "summon only" fighting game, if that's the theme

@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://da5nolxjbph02"]
+
+[ext_resource type="FontFile" uid="uid://dnb7xbrq16bbl" path="res://Square.ttf" id="1_5jru1"]
+
+[resource]
+default_font = ExtResource("1_5jru1")
+/colors/primary_text_color = Color(0, 0.780392, 0, 1)
+/fonts/standard_font = ExtResource("1_5jru1")
+Button/colors/font_color = Color(0, 0.784314, 0, 1)
+RichTextLabel/colors/default_color = Color(0, 0.784314, 0, 1)

@@ -1,0 +1,238 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3x2t7bdi076b"]
+
+[ext_resource type="Theme" uid="uid://da5nolxjbph02" path="res://ui_theme.tres" id="1_u40co"]
+[ext_resource type="Script" path="res://Scripts/OptionsScript.gd" id="2_qj67x"]
+
+[node name="options_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u40co")
+script = ExtResource("2_qj67x")
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -144.0
+offset_right = 107.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Options"
+scroll_active = false
+
+[node name="mouse sensitivity label" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -109.0
+offset_right = -24.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(214, 13)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]Mouse Sensitivity:"
+scroll_active = false
+
+[node name="mouse sensitivity textedit" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -110.0
+offset_right = 23.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 14
+placeholder_text = "1.0"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+virtual_keyboard_enabled = false
+highlight_all_occurrences = true
+
+[node name="mouse sensitivity slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -104.0
+offset_right = 249.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 10.0
+step = 0.05
+value = 1.0
+allow_greater = true
+
+[node name="master volume label" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -69.0
+offset_right = -24.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(214, 13)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]Master Volume:"
+scroll_active = false
+
+[node name="master volume slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -64.0
+offset_right = 249.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="sfx volume label" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -29.0
+offset_right = -24.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(214, 13)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]SFX Volume:"
+scroll_active = false
+
+[node name="sfx volume slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -24.0
+offset_right = 249.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="music volume label" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = 11.0
+offset_right = -24.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(214, 13)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]Music Volume:"
+scroll_active = false
+
+[node name="music volume slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = 16.0
+offset_right = 249.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="toggle fullscreen button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 48.0
+offset_right = 50.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 17)
+theme_override_font_sizes/font_size = 24
+text = "Toggle Fullscreen"
+
+[node name="exit button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 93.0
+offset_right = 50.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 17)
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+
+[connection signal="text_changed" from="mouse sensitivity textedit" to="." method="_on_mouse_sensitivity_textedit_text_changed"]
+[connection signal="value_changed" from="mouse sensitivity slider" to="." method="_on_mouse_sensitivity_slider_value_changed"]
+[connection signal="value_changed" from="master volume slider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="sfx volume slider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="music volume slider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="pressed" from="toggle fullscreen button" to="." method="_on_toggle_fullscreen_button_pressed"]
