@@ -1,0 +1,6 @@
+top down summoning survival:
+-move around screen
+-collect crystals
+-avoid enemies
+-summon big monster that you control once you have them all
+-maybe summon smaller guys too?

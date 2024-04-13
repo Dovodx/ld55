@@ -1,0 +1,35 @@
+FG MVP: too much, scale WAYYYY back
+-one character that can move
+-at least a dummy opponent, always face opponent
+-basic char sprite
+-camera config, pan around stage
+-high, low, and mid hitboxes & blocking
+-interpolation
+    ✔player character
+    -summons
+    -projectiles
+-hitboxes and simple hurtboxes (stand, crouch)
+-light, medium, heavy buttons - simple normals? or just have each button be a summon
+-health bars, super meter? some kind of resource to limit summoning (could be health)
+-3 basic summon types that can be tweaked for different characters
+-sound effects
+    -summoning sounds
+    -block
+    -hit (maybe different types)
+    -death
+    -voice over? FIGHT
+    -character name calls?
+-simple stage with corner limits
+-match timer
+-basic AI that summons things at you and attempts to block
+-at least 1 song
+-input remapping
+-input guide for default controls at least
+-controller support
+-possibly do motion inputs?
+
+Extended ideas:
+-3 characters with summons of different properties
+-at least 3 different stages with their own music tracks
+-super meter and super summons, use motion input probably 22X
+-unblockable detection/protection

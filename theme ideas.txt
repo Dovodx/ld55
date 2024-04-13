@@ -22,3 +22,27 @@ fps: I'd prefer another genre, since I did this last time; however, a first-pers
 platformer: very versatile, could work for just about any theme, maybe the most managable scope?
 tower defense/stop the hero: not as directly interactive for the player, but for certain themes I think it's a good fit
 fighting game: would have to be simple or it'd be highly impractical, movement & combat mechanics could be time consuming; could be interesting as a "summon only" fighting game, if that's the theme
+
+
+FG MVP:
+-one character that can move and block
+-high, low, and mid hitboxes & blocking
+-interpolation
+-hitboxes and simple hurtboxes (stand, crouch)
+-light, medium, heavy buttons - simple normals? or just have each button be a summon
+-health bars, super meter? some kind of resource to limit summoning (could be health)
+-3 basic summon types that can be tweaked for different characters
+-simple stage with corner limits
+-match timer
+-basic AI that summons things at you and attempts to block
+-at least 1 song
+-input remapping
+-input guide for default controls at least
+-controller support
+-possibly do motion inputs?
+
+Extended ideas:
+-3 characters with summons of different properties
+-at least 3 different stages with their own music tracks
+-super meter and super summons, use motion input probably 22X
+-unblockable detection/protection
