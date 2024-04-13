@@ -1,9 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=18 format=3 uid="uid://ca5avjtsn6egc"]
 
-[ext_resource type="Script" path="res://Scenes/CharacterScript.gd" id="1_pqfpr"]
-[ext_resource type="Texture2D" uid="uid://cydtxx3hdpqfv" path="res://Sprites/test player.png" id="2_d514b"]
+[ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
+[ext_resource type="Texture2D" uid="uid://duiwftba68fb5" path="res://Sprites/Player/stand 1.png" id="2_jnw6a"]
+[ext_resource type="Texture2D" uid="uid://c2slcior2nwi2" path="res://Sprites/Player/stand 2.png" id="3_4n220"]
+[ext_resource type="Texture2D" uid="uid://dvwqc8r7yn11g" path="res://Sprites/crystal.png" id="3_dua8r"]
+[ext_resource type="Script" path="res://Scripts/CrystalScript.gd" id="3_ls3qq"]
+[ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
+[ext_resource type="Script" path="res://Scripts/EnemyScript.gd" id="5_dgakn"]
+[ext_resource type="Texture2D" uid="uid://cw054e4pm4yxg" path="res://Sprites/enemy.png" id="5_girrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpk3q"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_2b5es"]
+resource_name = "stand"
+length = 1.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_jnw6a"), ExtResource("3_4n220"), ExtResource("4_e1gtx"), ExtResource("3_4n220")]
+}
+
+[sub_resource type="Animation" id="Animation_0y8xc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_jnw6a")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf16p"]
+_data = {
+"RESET": SubResource("Animation_0y8xc"),
+"stand": SubResource("Animation_2b5es")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ooioi"]
 size = Vector2(1000, 20)
@@ -11,41 +57,174 @@ size = Vector2(1000, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcfbf"]
 size = Vector2(20, 500)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pqsy"]
+size = Vector2(21, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_td7l3"]
+size = Vector2(26, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txvdo"]
+size = Vector2(26, 26)
+
 [node name="level" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="health bg" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_top = 256.0
+offset_right = 180.0
+offset_bottom = 270.0
+color = Color(0.188235, 0, 0, 1)
+
+[node name="health fill" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_top = 256.0
+offset_right = 180.0
+offset_bottom = 270.0
+color = Color(1, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(240, 135)
+
+[node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(156, 219)
+collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_pqfpr")
 
-[node name="sprite" type="Sprite2D" parent="CharacterBody2D"]
-scale = Vector2(0.625, 0.625)
-texture = ExtResource("2_d514b")
+[node name="invuln timer" type="Timer" parent="player"]
+process_callback = 0
+one_shot = true
 
-[node name="body collider" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="sprite" type="Sprite2D" parent="player"]
+texture = ExtResource("2_jnw6a")
+
+[node name="body collider" type="CollisionShape2D" parent="player"]
 shape = SubResource("RectangleShape2D_cpk3q")
 
-[node name="floor" type="StaticBody2D" parent="."]
-position = Vector2(248, 259)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_rf16p")
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+[node name="bounds" type="Node2D" parent="."]
+
+[node name="bottom wall" type="StaticBody2D" parent="bounds"]
+position = Vector2(242, 247)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/bottom wall"]
 position = Vector2(0, 19)
 shape = SubResource("RectangleShape2D_ooioi")
 
-[node name="ceiling" type="StaticBody2D" parent="."]
-position = Vector2(248, -30)
+[node name="top wall" type="StaticBody2D" parent="bounds"]
+position = Vector2(248, -29)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ceiling"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/top wall"]
 position = Vector2(0, 19)
 shape = SubResource("RectangleShape2D_ooioi")
 
-[node name="left wall" type="StaticBody2D" parent="."]
+[node name="left wall" type="StaticBody2D" parent="bounds"]
 position = Vector2(-10, 174)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/left wall"]
 shape = SubResource("RectangleShape2D_xcfbf")
 
-[node name="right wall" type="StaticBody2D" parent="."]
-position = Vector2(522, 174)
+[node name="right wall" type="StaticBody2D" parent="bounds"]
+position = Vector2(490, 174)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="right wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/right wall"]
 shape = SubResource("RectangleShape2D_xcfbf")
+
+[node name="crystals" type="Node2D" parent="."]
+
+[node name="crystal" type="Area2D" parent="crystals"]
+position = Vector2(433, 34)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("3_ls3qq")
+
+[node name="sprite" type="Sprite2D" parent="crystals/crystal"]
+texture = ExtResource("3_dua8r")
+
+[node name="collider" type="CollisionShape2D" parent="crystals/crystal"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4pqsy")
+
+[node name="crystal2" type="Area2D" parent="crystals"]
+position = Vector2(47, 40)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("3_ls3qq")
+
+[node name="sprite" type="Sprite2D" parent="crystals/crystal2"]
+texture = ExtResource("3_dua8r")
+
+[node name="collider" type="CollisionShape2D" parent="crystals/crystal2"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4pqsy")
+
+[node name="crystal3" type="Area2D" parent="crystals"]
+position = Vector2(50, 229)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("3_ls3qq")
+
+[node name="sprite" type="Sprite2D" parent="crystals/crystal3"]
+texture = ExtResource("3_dua8r")
+
+[node name="collider" type="CollisionShape2D" parent="crystals/crystal3"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4pqsy")
+
+[node name="crystal4" type="Area2D" parent="crystals"]
+position = Vector2(432, 226)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("3_ls3qq")
+
+[node name="sprite" type="Sprite2D" parent="crystals/crystal4"]
+texture = ExtResource("3_dua8r")
+
+[node name="collider" type="CollisionShape2D" parent="crystals/crystal4"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4pqsy")
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy" type="CharacterBody2D" parent="enemies"]
+position = Vector2(215, 121)
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("5_dgakn")
+
+[node name="movement timer" type="Timer" parent="enemies/enemy"]
+process_callback = 0
+
+[node name="sprite" type="Sprite2D" parent="enemies/enemy"]
+texture = ExtResource("5_girrm")
+
+[node name="collider" type="CollisionShape2D" parent="enemies/enemy"]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_td7l3")
+
+[node name="hitbox" type="Area2D" parent="enemies/enemy"]
+collision_layer = 8
+collision_mask = 2
+
+[node name="collider" type="CollisionShape2D" parent="enemies/enemy/hitbox"]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_txvdo")
+
+[connection signal="timeout" from="player/invuln timer" to="player" method="_on_invuln_timer_timeout"]
+[connection signal="body_entered" from="crystals/crystal" to="crystals/crystal" method="_on_body_entered"]
+[connection signal="body_entered" from="crystals/crystal2" to="crystals/crystal2" method="_on_body_entered"]
+[connection signal="body_entered" from="crystals/crystal3" to="crystals/crystal3" method="_on_body_entered"]
+[connection signal="body_entered" from="crystals/crystal4" to="crystals/crystal4" method="_on_body_entered"]
+[connection signal="timeout" from="enemies/enemy/movement timer" to="enemies/enemy" method="_on_movement_timer_timeout"]
+[connection signal="body_entered" from="enemies/enemy/hitbox" to="player" method="_on_hitbox_body_entered"]

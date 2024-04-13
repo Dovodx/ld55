@@ -1,6 +1,18 @@
 top down summoning survival:
--move around screen
--collect crystals
--avoid enemies
+✔move around screen
+✔collect crystals
+✔avoid enemies
 -summon big monster that you control once you have them all
+-spawn more enemies after all are defeated, respawn crystals
+✔basic char sprite
+    -stand animation
+    -running
+    -hurt
+    -dead
+-song
 -maybe summon smaller guys too?
+-interpolation
+    ✔player character
+    ✔enemy
+    -summon
+    -projectiles
