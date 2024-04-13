@@ -4,7 +4,6 @@
 
 [resource]
 default_font = ExtResource("1_5jru1")
-/colors/primary_text_color = Color(0, 0.780392, 0, 1)
 /fonts/standard_font = ExtResource("1_5jru1")
-Button/colors/font_color = Color(0, 0.784314, 0, 1)
-RichTextLabel/colors/default_color = Color(0, 0.784314, 0, 1)
+Button/colors/font_color = Color(0.419608, 0.0901961, 0.921569, 1)
+RichTextLabel/colors/default_color = Color(0.419608, 0.0901961, 0.921569, 1)

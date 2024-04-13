@@ -22,6 +22,7 @@ var lastPhysTime = Time.get_ticks_usec()
 
 var anim: AnimationPlayer
 
+var hud: CanvasLayer
 var healthBar: ColorRect
 
 var pauseMenu: Control
@@ -33,7 +34,9 @@ func _ready():
 	get_node("body collider").disabled = false
 	currentSpeed = SPEED
 	health = maxHealth
-	healthBar = get_node("/root/level/HUD/in-game/health fill")
+	
+	hud = get_node("/root/level/HUD")
+	healthBar = hud.get_node("in-game/health fill")
 	invulnTimer = get_node("invuln timer")
 	levelResetTimer = get_node("level reset")
 	
@@ -45,9 +48,9 @@ func _ready():
 	anim = get_node("AnimationPlayer")
 	anim.play("stand")
 	
-	pauseMenu = get_node("/root/level/HUD/pause menu")
-	pauseBg = get_node("/root/level/HUD/pause bg")
-	optionsMenu = get_node("/root/level/HUD/options menu")
+	pauseMenu = hud.get_node("pause menu")
+	pauseBg = hud.get_node("pause bg")
+	optionsMenu = hud.get_node("options menu")
 	
 	pauseMenu.visible = false
 	pauseBg.visible = false
@@ -58,8 +61,8 @@ func _ready():
 	pauseMenu.get_node("quit").connect("pressed", _on_quit_pressed)
 	optionsMenu.get_node("exit button").connect("pressed", closeOptionsMenu)
 	
-	get_node("/root/level/HUD/in-game").visible = true
-	get_node("/root/level/HUD/dead").visible = false
+	hud.get_node("in-game").visible = true
+	hud.get_node("dead").visible = false
 
 func _unhandled_input(event):
 	if dead: return
@@ -147,16 +150,28 @@ func get_crystal(crystal):
 	crystalsCollected += 1
 	get_node("sounds/pickup").play()
 	if !summonActive and crystalsCollected == 4:
-		summon()
+		show_summon_menu()
 		crystalsCollected = 0
 
-func summon():
-	summonActive = true
+func show_summon_menu():
 	canPickup = false
-	invulnTimer.stop()
-	invulnerable = true
-	anim.play("summon")
-	anim.queue("summon_run")
+	#show summon menu, pause game
+	get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	hud.get_node("pause bg").visible = true
+	hud.get_node("summon select").visible = true
+	
+	#summonActive = true
+	#invulnTimer.stop()
+	#invulnerable = true
+	#anim.play("summon")
+	#anim.queue("summon_run")
+
+func close_summon_menu():
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	hud.get_node("pause bg").visible = false
+	hud.get_node("summon select").visible = false
 
 func _take_damage(body, dmg):
 	if invulnerable: return
@@ -170,7 +185,7 @@ func _take_damage(body, dmg):
 		#todo show game over screen
 		visible = false
 		get_node("body collider").disabled = true
-		get_node("/root/level/HUD/dead").visible = true
+		hud.get_node("dead").visible = true
 	#todo death, hurt anim
 
 func _on_invuln_timer_timeout():
