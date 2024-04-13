@@ -517,7 +517,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [250.0]
+"values": [200.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf16p"]
@@ -571,10 +571,6 @@ script = ExtResource("1_pqfpr")
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
-one_shot = true
-
-[node name="level reset" type="Timer" parent="player"]
-wait_time = 0.2
 one_shot = true
 
 [node name="sprite root" type="Node2D" parent="player"]
@@ -677,5 +673,4 @@ script = ExtResource("18_125yl")
 enemy1 = ExtResource("17_a1svn")
 
 [connection signal="timeout" from="player/invuln timer" to="player" method="_on_invuln_timer_timeout"]
-[connection signal="timeout" from="player/level reset" to="player" method="_on_level_reset_timeout"]
 [connection signal="area_entered" from="player/hitbox" to="player" method="_on_enemy_hit"]

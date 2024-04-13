@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpt8rqpxvm6xa"]
+
+[ext_resource type="Script" path="res://Scripts/CrystalScript.gd" id="1_qrje7"]
+[ext_resource type="Texture2D" uid="uid://c25tt83saqagf" path="res://Sprites/crystal v2.png" id="2_6bnjl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pqsy"]
+size = Vector2(21, 32)
+
+[node name="crystal" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_qrje7")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_6bnjl")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4pqsy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

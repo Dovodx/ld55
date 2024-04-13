@@ -10,7 +10,7 @@ top down summoning survival:
     ✔summon monster
     -hurt
     -dead
-    -summon effect
+    ✔summon effect
 -song
 -maybe summon smaller guys too?
 -interpolation
@@ -20,11 +20,12 @@ top down summoning survival:
     -projectiles?
 -sfx
     ✔crystal get
-    -hurt
-    -summon
+    ✔hurt
+    ✔summon
     ✔jumping aboard
     -summon sounds (running, chomping)
     ✔kill enemy
     -die
     -enemy voice or something
+    -all enemies clear/level up
 -background

@@ -1,18 +1,25 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
+const SPEED = 400.0
+var dmgAmount = 10
+var angleVariationDeg = 30
 var movementTimer: Timer
 var player: Node2D
+var dead = false
 
 var sprite: Sprite2D
+var scaredSprite = load("res://Sprites/enemy1/enemy1 scared.png")
 var spritePositions = [Vector2.ZERO, Vector2.ZERO]
 var lastPhysTime = Time.get_ticks_usec()
 
 var hitbox: Area2D
 var hurtbox: Area2D
 
+signal take_damage(dmg)
+
 func _ready():
+	dead = false
 	movementTimer = get_node("movement timer")
 	movementTimer.start()
 	player = get_node("/root/level/player")
@@ -28,6 +35,8 @@ func _ready():
 	hitbox.set_deferred("monitoring", true)
 	hitbox.set_deferred("monitorable", true)
 	visible = true
+	
+	hitbox.body_entered.connect(Callable(player._take_damage.bind(dmgAmount)))
 
 func _process(delta):
 	var timeDiff = (Time.get_ticks_usec() - lastPhysTime) / 1000000.0
@@ -37,8 +46,14 @@ func _process(delta):
 	)
 
 func _physics_process(delta):
-	velocity *= 0.98
-	sprite.flip_h = velocity.x > 0
+	if !dead:
+		velocity *= 0.98
+		sprite.flip_h = velocity.x > 0
+	else:
+		velocity = Vector2.ZERO
+	
+	if player.summonActive:
+		sprite.texture = scaredSprite
 
 	move_and_slide()
 	
@@ -48,12 +63,17 @@ func _physics_process(delta):
 
 
 func _on_movement_timer_timeout():
-	velocity = (player.global_position - global_position).normalized() * SPEED
+	var flee = -0.7 if player.summonActive else 1
+	velocity = (player.global_position - global_position).normalized().rotated(deg_to_rad((randf() - 0.5) * angleVariationDeg)) * SPEED * flee
 
 func die():
+	if dead: return
+	get_node("/root/level/spawner").enemy_dead()
+	dead = true
 	hitbox.set_deferred("monitoring", false)
 	hitbox.set_deferred("monitorable", false)
 	hurtbox.set_deferred("monitoring", false)
 	hurtbox.set_deferred("monitorable", false)
 	visible = false
 	get_node("die").play()
+	#todo actually cleanup object

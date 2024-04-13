@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 200.0
+@export var currentSpeed = SPEED
 
 var maxHealth = 100
 var health = 100
@@ -9,6 +10,8 @@ var invulnTimer: Timer
 
 var crystalsCollected = 0
 var summonActive = false
+var canPickup = true
+var levelResetTimer: Timer
 
 var spriteRoot: Node2D
 var spritePositions = [Vector2.ZERO, Vector2.ZERO]
@@ -21,9 +24,11 @@ var anim: AnimationPlayer
 var healthBar: ColorRect
 
 func _ready():
+	currentSpeed = SPEED
 	health = maxHealth
 	healthBar = get_node("/root/level/Control/health fill")
 	invulnTimer = get_node("invuln timer")
+	levelResetTimer = get_node("level reset")
 	
 	spriteRoot = get_node("sprite root")
 	spritePositions[0] = spriteRoot.global_position
@@ -32,6 +37,12 @@ func _ready():
 	summonSprite = get_node("sprite root/summon sprite")
 	anim = get_node("AnimationPlayer")
 	anim.play("stand")
+
+func next_level():
+	summonActive = false
+	invulnerable = false
+	canPickup = false
+	levelResetTimer.start()
 
 func _process(delta):
 	var timeDiff = (Time.get_ticks_usec() - lastPhysTime) / 1000000.0
@@ -44,19 +55,19 @@ func _physics_process(delta):
 	var movementVector = Vector2.ZERO
 	var dirH = Input.get_axis("left", "right")
 	if dirH:
-		movementVector.x = dirH * SPEED
+		movementVector.x = dirH * currentSpeed
 	else:
-		movementVector.x = dirH * -SPEED
+		movementVector.x = dirH * -currentSpeed
 	charSprite.flip_h = charSprite.flip_h if dirH == 0 else dirH < 0
 	summonSprite.flip_h = summonSprite.flip_h if dirH == 0 else dirH < 0
 	
 	var dirV = Input.get_axis("up", "down")
 	if dirV:
-		movementVector.y = dirV * SPEED
+		movementVector.y = dirV * currentSpeed
 	else:
-		movementVector.y = dirV * -SPEED
+		movementVector.y = dirV * -currentSpeed
 	
-	velocity = movementVector.limit_length(SPEED)
+	velocity = movementVector.limit_length(currentSpeed)
 	if !summonActive:
 		if movementVector.length() == 0:
 			anim.play("stand")
@@ -70,31 +81,28 @@ func _physics_process(delta):
 	lastPhysTime = Time.get_ticks_usec()
 
 func get_crystal(crystal):
+	if !canPickup: return
 	crystal.visible = false
 	crystal.set_deferred("monitoring", false)
 	crystal.set_deferred("monitorable", false)
 	crystalsCollected += 1
 	get_node("sounds/pickup").play()
-	if !summonActive and crystalsCollected == 3:
+	if !summonActive and crystalsCollected == 4:
 		summon()
-	#todo play sound
-	#todo get beeg friend when you get all crystals, respawn crystals, etc
+		crystalsCollected = 0
 
 func summon():
-	print("summon active")
-	#todo stop movement during summon probably
 	summonActive = true
+	canPickup = false
 	invulnTimer.stop()
 	invulnerable = true
 	anim.play("summon")
 	anim.queue("summon_run")
 	#todo end state when all enemies gone
 
-func _on_hitbox_body_entered(body):
-	take_damage(10)
-
-func take_damage(dmg):
+func _take_damage(body, dmg):
 	if invulnerable: return
+	get_node("sounds/hurt").play()
 	invulnerable = true
 	invulnTimer.start()
 	health -= dmg
@@ -103,10 +111,13 @@ func take_damage(dmg):
 
 func _on_invuln_timer_timeout():
 	#todo invuln effect
+	print("invuln timer expired")
 	invulnerable = false
 
-
 func _on_enemy_hit(area):
-	#todo score, sfx, track when all enemies dead
+	#todo score
 	if area.get_parent().get_parent().name == "enemies":
 		area.get_parent().die()
+
+func _on_level_reset_timeout():
+	canPickup = true
