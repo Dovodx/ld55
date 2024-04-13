@@ -553,6 +553,7 @@ collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_pqfpr")
 currentSpeed = 200.0
+summons = Array[PackedScene]([null, null, null, null, null])
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0

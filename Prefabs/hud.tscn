@@ -8,6 +8,7 @@
 follow_viewport_enabled = true
 
 [node name="pause bg" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,6 +40,7 @@ color = Color(1, 0, 0, 1)
 
 [node name="summon select" type="Control" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8a2yb")
 
-[node name="TextureRect" type="TextureRect" parent="summon select"]
+[node name="bg" type="TextureRect" parent="summon select"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

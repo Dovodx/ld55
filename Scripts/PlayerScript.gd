@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 @export var currentSpeed = SPEED
+@export var summons: Array[PackedScene]
 
 var maxHealth = 100
 var health = 100
@@ -53,6 +54,7 @@ func _ready():
 	optionsMenu = hud.get_node("options menu")
 	
 	pauseMenu.visible = false
+	hud.get_node("summon select").visible = false
 	pauseBg.visible = false
 	optionsMenu.visible = false
 	
@@ -63,6 +65,11 @@ func _ready():
 	
 	hud.get_node("in-game").visible = true
 	hud.get_node("dead").visible = false
+	#todo connect summon buttons to summon function
+	for button in hud.get_node("summon select").get_children():
+		if button.name == "bg":
+			continue
+		button.connect("pressed", summon.bind(button.get_index() - 1))
 
 func _unhandled_input(event):
 	if dead: return
@@ -155,7 +162,6 @@ func get_crystal(crystal):
 
 func show_summon_menu():
 	canPickup = false
-	#show summon menu, pause game
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	hud.get_node("pause bg").visible = true
@@ -172,6 +178,10 @@ func close_summon_menu():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	hud.get_node("pause bg").visible = false
 	hud.get_node("summon select").visible = false
+
+func summon(monsterNum):
+	print("summoning number " + str(monsterNum))
+	close_summon_menu()
 
 func _take_damage(body, dmg):
 	if invulnerable: return
