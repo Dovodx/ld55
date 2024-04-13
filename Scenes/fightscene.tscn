@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=33 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="Texture2D" uid="uid://duiwftba68fb5" path="res://Sprites/Player/stand 1.png" id="2_jnw6a"]
@@ -8,6 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
 [ext_resource type="Script" path="res://Scripts/EnemyScript.gd" id="5_dgakn"]
 [ext_resource type="Texture2D" uid="uid://cw054e4pm4yxg" path="res://Sprites/enemy.png" id="5_girrm"]
+[ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Summon/stand 2.png" id="5_o1ioh"]
+[ext_resource type="Texture2D" uid="uid://nvb0ed5yc8n2" path="res://Sprites/Player/run 1.png" id="5_tmu08"]
+[ext_resource type="Texture2D" uid="uid://bmwhw1krgdgfr" path="res://Sprites/Player/run 3.png" id="6_7th03"]
+[ext_resource type="Texture2D" uid="uid://dkde3iqdjiop0" path="res://Sprites/Summon/stand 1.png" id="7_hd0vu"]
+[ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Summon/stand 3.png" id="9_quxqn"]
+[ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Summon/stand 4.png" id="10_vdxjk"]
+[ext_resource type="AudioStream" uid="uid://dt32vyt0rvoit" path="res://Sounds/powerup 2.wav" id="11_thdfb"]
+[ext_resource type="AudioStream" uid="uid://4yb3mboe3e8a" path="res://Sounds/hurt.wav" id="12_h16eb"]
+[ext_resource type="AudioStream" uid="uid://c3y2xolflpc0g" path="res://Sounds/jump.wav" id="13_qhvna"]
+[ext_resource type="AudioStream" uid="uid://cic5f7xn2jp4l" path="res://Sounds/summon.wav" id="14_1u4bl"]
+[ext_resource type="AudioStream" uid="uid://b4w7ity44dmav" path="res://Sounds/explode 4.wav" id="19_1jnxk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpk3q"]
 size = Vector2(32, 32)
@@ -20,7 +31,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
+tracks/0/path = NodePath("sprite root/sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +46,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
+tracks/0/path = NodePath("sprite root/sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -44,12 +55,265 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("2_jnw6a")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite root/sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite root/summon sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite root/summon sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite root/summon sprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_o1ioh")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("hitbox:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("hitbox:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ljafv"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_tmu08"), ExtResource("2_jnw6a"), ExtResource("6_7th03"), ExtResource("2_jnw6a")]
+}
+
+[sub_resource type="Animation" id="Animation_o20gr"]
+resource_name = "summon"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_tmu08"), ExtResource("2_jnw6a")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite root/sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -40), Vector2(0, -25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite root/summon sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite root/summon sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sounds/jump")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cnmae"]
+resource_name = "summon_run"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_jnw6a")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite root/sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite root/summon sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite root/summon sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite root/summon sprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_vdxjk"), ExtResource("7_hd0vu"), ExtResource("5_o1ioh"), ExtResource("9_quxqn")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("hitbox:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("hitbox:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf16p"]
 _data = {
 "RESET": SubResource("Animation_0y8xc"),
-"stand": SubResource("Animation_2b5es")
+"run": SubResource("Animation_ljafv"),
+"stand": SubResource("Animation_2b5es"),
+"summon": SubResource("Animation_o20gr"),
+"summon_run": SubResource("Animation_cnmae")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmdai"]
+size = Vector2(62, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ooioi"]
 size = Vector2(1000, 20)
@@ -101,8 +365,14 @@ script = ExtResource("1_pqfpr")
 process_callback = 0
 one_shot = true
 
-[node name="sprite" type="Sprite2D" parent="player"]
+[node name="sprite root" type="Node2D" parent="player"]
+
+[node name="sprite" type="Sprite2D" parent="player/sprite root"]
 texture = ExtResource("2_jnw6a")
+
+[node name="summon sprite" type="Sprite2D" parent="player/sprite root"]
+visible = false
+texture = ExtResource("5_o1ioh")
 
 [node name="body collider" type="CollisionShape2D" parent="player"]
 shape = SubResource("RectangleShape2D_cpk3q")
@@ -112,6 +382,34 @@ callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_rf16p")
 }
+
+[node name="hitbox" type="Area2D" parent="player"]
+collision_layer = 8
+collision_mask = 16
+monitoring = false
+monitorable = false
+
+[node name="collider" type="CollisionShape2D" parent="player/hitbox"]
+position = Vector2(2, 4)
+shape = SubResource("RectangleShape2D_tmdai")
+
+[node name="sounds" type="Node2D" parent="player"]
+
+[node name="pickup" type="AudioStreamPlayer2D" parent="player/sounds"]
+stream = ExtResource("11_thdfb")
+bus = &"SFX"
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="player/sounds"]
+stream = ExtResource("12_h16eb")
+bus = &"SFX"
+
+[node name="jump" type="AudioStreamPlayer2D" parent="player/sounds"]
+stream = ExtResource("13_qhvna")
+bus = &"SFX"
+
+[node name="summon" type="AudioStreamPlayer2D" parent="player/sounds"]
+stream = ExtResource("14_1u4bl")
+bus = &"SFX"
 
 [node name="bounds" type="Node2D" parent="."]
 
@@ -157,7 +455,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_4pqsy")
 
 [node name="crystal2" type="Area2D" parent="crystals"]
-position = Vector2(47, 40)
+position = Vector2(50, 34)
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("3_ls3qq")
@@ -170,7 +468,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_4pqsy")
 
 [node name="crystal3" type="Area2D" parent="crystals"]
-position = Vector2(50, 229)
+position = Vector2(50, 226)
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("3_ls3qq")
@@ -183,7 +481,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_4pqsy")
 
 [node name="crystal4" type="Area2D" parent="crystals"]
-position = Vector2(432, 226)
+position = Vector2(433, 226)
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("3_ls3qq")
@@ -221,7 +519,20 @@ collision_mask = 2
 position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_txvdo")
 
+[node name="hurtbox" type="Area2D" parent="enemies/enemy"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="collider" type="CollisionShape2D" parent="enemies/enemy/hurtbox"]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_txvdo")
+
+[node name="die" type="AudioStreamPlayer2D" parent="enemies/enemy"]
+stream = ExtResource("19_1jnxk")
+volume_db = -3.0
+
 [connection signal="timeout" from="player/invuln timer" to="player" method="_on_invuln_timer_timeout"]
+[connection signal="area_entered" from="player/hitbox" to="player" method="_on_enemy_hit"]
 [connection signal="body_entered" from="crystals/crystal" to="crystals/crystal" method="_on_body_entered"]
 [connection signal="body_entered" from="crystals/crystal2" to="crystals/crystal2" method="_on_body_entered"]
 [connection signal="body_entered" from="crystals/crystal3" to="crystals/crystal3" method="_on_body_entered"]
