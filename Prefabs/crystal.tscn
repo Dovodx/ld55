@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pqsy"]
 size = Vector2(21, 32)
 
-[node name="crystal" type="Area2D"]
+[node name="purple crystal" type="Area2D"]
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("1_qrje7")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkde3iqdjiop0"
-path="res://.godot/imported/stand 1.png-f498d7daa5244910d302d9fcdba719e1.ctex"
+uid="uid://bg2vvprx8naqo"
+path="res://.godot/imported/effect.png-8bce171b83778eb9aa6e2b0cb220352f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Summon/stand 1.png"
-dest_files=["res://.godot/imported/stand 1.png-f498d7daa5244910d302d9fcdba719e1.ctex"]
+source_file="res://Sprites/Mr. Chompy/effect.png"
+dest_files=["res://.godot/imported/effect.png-8bce171b83778eb9aa6e2b0cb220352f.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@ top down summoning survival:
 ✔collect crystals
 ✔avoid enemies
 ✔summon big monster that you control once you have them all
--spawn more enemies after all are defeated, respawn crystals
+✔spawn more enemies after all are defeated, respawn crystals
 ✔basic char sprite
     ✔stand animation
     ✔running
@@ -17,7 +17,6 @@ top down summoning survival:
     ✔player character
     ✔enemy
     ✔summon
-    -projectiles?
 -sfx
     ✔crystal get
     ✔hurt
@@ -29,3 +28,11 @@ top down summoning survival:
     -enemy voice or something
     -all enemies clear/level up
 -background
+-randomize crystal locations
+-autonomous summon separate from player
+-choose between different summons with different properties, could maybe keep riding summon with a limit?
+    -summon select menu
+-enemy2: move only in cardinal directions
+-enemy3: DVD logo
+✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
+-fix menu button sizing

@@ -1,16 +1,18 @@
-[gd_scene load_steps=29 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=32 format=3 uid="uid://ca5avjtsn6egc"]
 
+[ext_resource type="PackedScene" uid="uid://d3x2t7bdi076b" path="res://Prefabs/options_menu.tscn" id="1_1cwe6"]
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
+[ext_resource type="Theme" uid="uid://da5nolxjbph02" path="res://ui_theme.tres" id="2_haxe4"]
 [ext_resource type="Texture2D" uid="uid://duiwftba68fb5" path="res://Sprites/Player/stand 1.png" id="2_jnw6a"]
 [ext_resource type="Texture2D" uid="uid://c2slcior2nwi2" path="res://Sprites/Player/stand 2.png" id="3_4n220"]
 [ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
-[ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Summon/effect.png" id="4_vdgsq"]
-[ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Summon/stand 2.png" id="5_o1ioh"]
+[ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Mr. Chompy/effect.png" id="4_vdgsq"]
+[ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Mr. Chompy/stand 2.png" id="5_o1ioh"]
 [ext_resource type="Texture2D" uid="uid://nvb0ed5yc8n2" path="res://Sprites/Player/run 1.png" id="5_tmu08"]
 [ext_resource type="Texture2D" uid="uid://bmwhw1krgdgfr" path="res://Sprites/Player/run 3.png" id="6_7th03"]
-[ext_resource type="Texture2D" uid="uid://dkde3iqdjiop0" path="res://Sprites/Summon/stand 1.png" id="7_hd0vu"]
-[ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Summon/stand 3.png" id="9_quxqn"]
-[ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Summon/stand 4.png" id="10_vdxjk"]
+[ext_resource type="Texture2D" uid="uid://dkde3iqdjiop0" path="res://Sprites/Mr. Chompy/stand 1.png" id="7_hd0vu"]
+[ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Mr. Chompy/stand 3.png" id="9_quxqn"]
+[ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Mr. Chompy/stand 4.png" id="10_vdxjk"]
 [ext_resource type="AudioStream" uid="uid://b0b1w3fuw2crd" path="res://Sounds/powerup 2.wav" id="11_thdfb"]
 [ext_resource type="AudioStream" uid="uid://bqbwcbe6b73dd" path="res://Sounds/hurt.wav" id="12_h16eb"]
 [ext_resource type="AudioStream" uid="uid://80bm43jtsaua" path="res://Sounds/jump.wav" id="13_qhvna"]
@@ -18,87 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://dpt8rqpxvm6xa" path="res://Prefabs/crystal.tscn" id="16_1oikx"]
 [ext_resource type="PackedScene" uid="uid://cp8w68w5svo1f" path="res://Prefabs/enemy1.tscn" id="17_a1svn"]
 [ext_resource type="Script" path="res://Scripts/SpawnerScript.gd" id="18_125yl"]
+[ext_resource type="AudioStream" uid="uid://dqtx8nlafrxs7" path="res://Sounds/explode 4.wav" id="19_1jnxk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpk3q"]
 size = Vector2(32, 32)
-
-[sub_resource type="Animation" id="Animation_2b5es"]
-resource_name = "stand"
-length = 1.1
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite root/sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.65, 1.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("2_jnw6a"), ExtResource("3_4n220"), ExtResource("4_e1gtx"), ExtResource("3_4n220")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite root/summon sprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("hitbox:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("hitbox:monitorable")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("sprite root/sprite:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite root/summon effect:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_0y8xc"]
 length = 0.001
@@ -299,6 +224,84 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2b5es"]
+resource_name = "stand"
+length = 1.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.65, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_jnw6a"), ExtResource("3_4n220"), ExtResource("4_e1gtx"), ExtResource("3_4n220")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite root/summon sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hitbox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite root/sprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite root/summon effect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_o20gr"]
@@ -517,7 +520,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [250.0]
+"values": [500.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf16p"]
@@ -536,38 +539,166 @@ size = Vector2(62, 40)
 size = Vector2(1000, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcfbf"]
-size = Vector2(20, 500)
+size = Vector2(20, 1000)
 
 [node name="level" type="Node2D"]
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 480.0
-offset_bottom = 270.0
+[node name="HUD" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
-[node name="health bg" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_top = 256.0
-offset_right = 180.0
-offset_bottom = 270.0
+[node name="pause bg" type="ColorRect" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.258824)
+
+[node name="in-game" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="health bg" type="ColorRect" parent="HUD/in-game"]
+offset_top = 512.0
+offset_right = 360.0
+offset_bottom = 540.0
 color = Color(0.188235, 0, 0, 1)
 
-[node name="health fill" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_top = 256.0
-offset_right = 180.0
-offset_bottom = 270.0
+[node name="health fill" type="ColorRect" parent="HUD/in-game"]
+offset_top = 512.0
+offset_right = 360.0
+offset_bottom = 540.0
 color = Color(1, 0, 0, 1)
 
+[node name="summon select" type="Control" parent="HUD"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_haxe4")
+
+[node name="Mr Chompy" type="Button" parent="HUD/summon select"]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 147.0
+offset_right = 411.0
+offset_bottom = 173.0
+text = "Mr. Chompy"
+
+[node name="dead" type="Control" parent="HUD"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pause menu" type="Control" parent="HUD"]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_haxe4")
+
+[node name="title" type="RichTextLabel" parent="HUD/pause menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -121.0
+offset_right = 100.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Paused"
+
+[node name="resume" type="Button" parent="HUD/pause menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -53.0
+offset_right = 70.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("2_haxe4")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="options" type="Button" parent="HUD/pause menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 7.0
+offset_right = 70.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("2_haxe4")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="quit" type="Button" parent="HUD/pause menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 67.0
+offset_right = 70.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("2_haxe4")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="options menu" parent="HUD" instance=ExtResource("1_1cwe6")]
+process_mode = 2
+visible = false
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(240, 135)
+position = Vector2(480, 270)
 
 [node name="player" type="CharacterBody2D" parent="."]
-position = Vector2(238, 134)
+position = Vector2(480, 270)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_pqfpr")
+currentSpeed = 200.0
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
@@ -628,30 +759,34 @@ bus = &"SFX"
 stream = ExtResource("14_7qc6o")
 bus = &"SFX"
 
+[node name="kill" type="AudioStreamPlayer2D" parent="player/sounds"]
+stream = ExtResource("19_1jnxk")
+volume_db = -4.0
+max_polyphony = 3
+bus = &"SFX"
+
 [node name="bounds" type="Node2D" parent="."]
 
 [node name="bottom wall" type="StaticBody2D" parent="bounds"]
-position = Vector2(242, 247)
+position = Vector2(480, 522)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/bottom wall"]
-position = Vector2(0, 19)
 shape = SubResource("RectangleShape2D_ooioi")
 
 [node name="top wall" type="StaticBody2D" parent="bounds"]
-position = Vector2(248, -29)
+position = Vector2(480, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/top wall"]
-position = Vector2(0, 19)
 shape = SubResource("RectangleShape2D_ooioi")
 
 [node name="left wall" type="StaticBody2D" parent="bounds"]
-position = Vector2(-10, 174)
+position = Vector2(-10, 269)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/left wall"]
 shape = SubResource("RectangleShape2D_xcfbf")
 
 [node name="right wall" type="StaticBody2D" parent="bounds"]
-position = Vector2(490, 174)
+position = Vector2(970, 271)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds/right wall"]
 shape = SubResource("RectangleShape2D_xcfbf")
@@ -662,13 +797,13 @@ shape = SubResource("RectangleShape2D_xcfbf")
 position = Vector2(32, 32)
 
 [node name="crystal2" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(448, 32)
+position = Vector2(928, 32)
 
 [node name="crystal3" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(32, 224)
+position = Vector2(32, 480)
 
 [node name="crystal4" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(448, 224)
+position = Vector2(928, 480)
 
 [node name="enemies" type="Node2D" parent="."]
 

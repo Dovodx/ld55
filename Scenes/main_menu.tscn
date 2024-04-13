@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://662t41l4s3d3"]
+[gd_scene load_steps=5 format=3 uid="uid://662t41l4s3d3"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenuScript.gd" id="1_khv63"]
 [ext_resource type="Theme" uid="uid://da5nolxjbph02" path="res://ui_theme.tres" id="1_ma1bl"]
+[ext_resource type="PackedScene" uid="uid://ca5avjtsn6egc" path="res://Scenes/fightscene.tscn" id="2_62j7x"]
 [ext_resource type="PackedScene" uid="uid://d3x2t7bdi076b" path="res://Prefabs/options_menu.tscn" id="4_d4eeu"]
 
 [node name="Main Menu" type="Control"]
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_khv63")
+level = ExtResource("2_62j7x")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0

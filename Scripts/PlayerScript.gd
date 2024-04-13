@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
+const SPEED = 300.0
 @export var currentSpeed = SPEED
 
 var maxHealth = 100
 var health = 100
+var dead = false
 var invulnerable = false
 var invulnTimer: Timer
 
@@ -23,10 +24,16 @@ var anim: AnimationPlayer
 
 var healthBar: ColorRect
 
+var pauseMenu: Control
+var pauseBg: Control
+var optionsMenu: Control
+
 func _ready():
+	dead = false
+	get_node("body collider").disabled = false
 	currentSpeed = SPEED
 	health = maxHealth
-	healthBar = get_node("/root/level/Control/health fill")
+	healthBar = get_node("/root/level/HUD/in-game/health fill")
 	invulnTimer = get_node("invuln timer")
 	levelResetTimer = get_node("level reset")
 	
@@ -37,10 +44,62 @@ func _ready():
 	summonSprite = get_node("sprite root/summon sprite")
 	anim = get_node("AnimationPlayer")
 	anim.play("stand")
+	
+	pauseMenu = get_node("/root/level/HUD/pause menu")
+	pauseBg = get_node("/root/level/HUD/pause bg")
+	optionsMenu = get_node("/root/level/HUD/options menu")
+	
+	pauseMenu.visible = false
+	pauseBg.visible = false
+	optionsMenu.visible = false
+	
+	pauseMenu.get_node("resume").connect("pressed", unpauseGame)
+	pauseMenu.get_node("options").connect("pressed", openOptionsMenu)
+	pauseMenu.get_node("quit").connect("pressed", _on_quit_pressed)
+	optionsMenu.get_node("exit button").connect("pressed", closeOptionsMenu)
+	
+	get_node("/root/level/HUD/in-game").visible = true
+	get_node("/root/level/HUD/dead").visible = false
+
+func _unhandled_input(event):
+	if dead: return
+	if event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	elif event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+		pauseGame()
+		#todo unpause with esc
+
+func pauseGame():
+	pauseBg.visible = true
+	pauseMenu.visible = true
+	get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
+func unpauseGame():
+	pauseBg.visible = false
+	optionsMenu.visible = false
+	pauseMenu.visible = false
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+
+func openOptionsMenu():
+	optionsMenu.visible = true
+	pauseMenu.visible = false
+
+func closeOptionsMenu():
+	optionsMenu.visible = false
+	pauseMenu.visible = true
+
+func _on_quit_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func next_level():
 	summonActive = false
-	invulnerable = false
+	currentSpeed = SPEED
+	invulnerable = true
+	invulnTimer.start()
 	canPickup = false
 	levelResetTimer.start()
 
@@ -98,7 +157,6 @@ func summon():
 	invulnerable = true
 	anim.play("summon")
 	anim.queue("summon_run")
-	#todo end state when all enemies gone
 
 func _take_damage(body, dmg):
 	if invulnerable: return
@@ -106,18 +164,24 @@ func _take_damage(body, dmg):
 	invulnerable = true
 	invulnTimer.start()
 	health -= dmg
-	healthBar.size.x = max((health as float / maxHealth) * 180.0, 0)
+	healthBar.size.x = max((health as float / maxHealth) * 360.0, 0)
+	if health == 0:
+		dead = true
+		#todo show game over screen
+		visible = false
+		get_node("body collider").disabled = true
+		get_node("/root/level/HUD/dead").visible = true
 	#todo death, hurt anim
 
 func _on_invuln_timer_timeout():
 	#todo invuln effect
-	print("invuln timer expired")
 	invulnerable = false
 
 func _on_enemy_hit(area):
 	#todo score
 	if area.get_parent().get_parent().name == "enemies":
 		area.get_parent().die()
+		get_node("sounds/kill").play()
 
 func _on_level_reset_timeout():
 	canPickup = true

@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp8w68w5svo1f"]
+[gd_scene load_steps=5 format=3 uid="uid://cp8w68w5svo1f"]
 
-[ext_resource type="Script" path="res://Scripts/EnemyScript.gd" id="1_e251e"]
+[ext_resource type="Script" path="res://Scripts/Enemy1Script.gd" id="1_e251e"]
 [ext_resource type="Texture2D" uid="uid://cw054e4pm4yxg" path="res://Sprites/enemy1/enemy.png" id="2_aai8d"]
-[ext_resource type="AudioStream" uid="uid://dqtx8nlafrxs7" path="res://Sounds/explode 4.wav" id="3_4iejq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_td7l3"]
 size = Vector2(26, 26)
@@ -43,10 +42,5 @@ collision_mask = 0
 [node name="collider" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_txvdo")
-
-[node name="die" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_4iejq")
-volume_db = -5.0
-bus = &"SFX"
 
 [connection signal="timeout" from="movement timer" to="." method="_on_movement_timer_timeout"]

@@ -5,7 +5,7 @@ extends Node
 var levelNum = 0
 var enemyCount = 0
 #480x270
-var screenCenter = Vector2(240, 135)
+var screenCenter = Vector2(480, 270)
 
 var player: Node2D
 
@@ -17,7 +17,7 @@ func _ready():
 func spawn_enemy():
 	enemyCount += 1
 	var enemyToSpawn = enemy1.instantiate()
-	var distanceFromCenter = randi_range(90, 120)
+	var distanceFromCenter = randi_range(110, 200)
 	var angle = randi_range(0, 360)
 	var distanceVector = Vector2(distanceFromCenter, 0)
 	distanceVector = distanceVector.rotated(deg_to_rad(angle))

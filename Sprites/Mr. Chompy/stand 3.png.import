@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cy1jyce3nueix"
-path="res://.godot/imported/stand 3.png-0f98c11a5ef2f90634ea0dd477988f58.ctex"
+path="res://.godot/imported/stand 3.png-e51a44b3798aff363da686d8c1ce6307.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Summon/stand 3.png"
-dest_files=["res://.godot/imported/stand 3.png-0f98c11a5ef2f90634ea0dd477988f58.ctex"]
+source_file="res://Sprites/Mr. Chompy/stand 3.png"
+dest_files=["res://.godot/imported/stand 3.png-e51a44b3798aff363da686d8c1ce6307.ctex"]
 
 [params]
 

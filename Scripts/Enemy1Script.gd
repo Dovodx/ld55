@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 400.0
+const SPEED = 550.0
 var dmgAmount = 10
 var angleVariationDeg = 30
 var movementTimer: Timer
@@ -61,19 +61,18 @@ func _physics_process(delta):
 	spritePositions[1] = global_position
 	lastPhysTime = Time.get_ticks_usec()
 
-
 func _on_movement_timer_timeout():
-	var flee = -0.7 if player.summonActive else 1
-	velocity = (player.global_position - global_position).normalized().rotated(deg_to_rad((randf() - 0.5) * angleVariationDeg)) * SPEED * flee
+	var fleeDir = -0.7 if player.summonActive else 1.0
+	var fleeAngle = 5.0 if player.summonActive else 1.0
+	velocity = (player.global_position - global_position).normalized().rotated(deg_to_rad(randi_range(-angleVariationDeg, angleVariationDeg) * fleeAngle / 2.0)) * SPEED * fleeDir
 
 func die():
 	if dead: return
 	get_node("/root/level/spawner").enemy_dead()
 	dead = true
-	hitbox.set_deferred("monitoring", false)
-	hitbox.set_deferred("monitorable", false)
-	hurtbox.set_deferred("monitoring", false)
-	hurtbox.set_deferred("monitorable", false)
-	visible = false
-	get_node("die").play()
-	#todo actually cleanup object
+	call_deferred("queue_free")
+	#hitbox.set_deferred("monitoring", false)
+	#hitbox.set_deferred("monitorable", false)
+	#hurtbox.set_deferred("monitoring", false)
+	#hurtbox.set_deferred("monitorable", false)
+	#visible = false
