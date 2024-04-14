@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp8w68w5svo1f"]
+[gd_scene load_steps=5 format=3 uid="uid://5qmd1oevpk34"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy1Script.gd" id="1_e251e"]
-[ext_resource type="Texture2D" uid="uid://cw054e4pm4yxg" path="res://Sprites/enemy1/enemy.png" id="2_aai8d"]
+[ext_resource type="Texture2D" uid="uid://m7g421plaeey" path="res://Sprites/enemy2/enemy2.png" id="1_c16b0"]
+[ext_resource type="Script" path="res://Scripts/Enemy2Script.gd" id="1_xki4v"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_td7l3"]
-size = Vector2(26, 26)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dngt7"]
+size = Vector2(30, 40)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_txvdo"]
-size = Vector2(26, 26)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsj7a"]
+size = Vector2(30, 40)
 
-[node name="enemy1" type="CharacterBody2D"]
+[node name="enemy2" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
-script = ExtResource("1_e251e")
+script = ExtResource("1_xki4v")
 
 [node name="move timer" type="Timer" parent="."]
 process_callback = 0
@@ -24,29 +24,28 @@ one_shot = true
 [node name="sprite root" type="Node2D" parent="."]
 
 [node name="sprite" type="Sprite2D" parent="sprite root"]
-texture = ExtResource("2_aai8d")
+texture = ExtResource("1_c16b0")
 
 [node name="healthbar" type="ColorRect" parent="sprite root"]
 offset_left = -15.0
-offset_top = -17.0
+offset_top = -27.0
 offset_right = 15.0
-offset_bottom = -15.0
+offset_bottom = -25.0
 mouse_filter = 2
 color = Color(1, 0, 0, 1)
 
 [node name="collider" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_td7l3")
+position = Vector2(-2, -2)
+shape = SubResource("RectangleShape2D_dngt7")
 
 [node name="hitbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
 collision_mask = 2
 
-[node name="collider" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_txvdo")
+[node name="collider" type="CollisionPolygon2D" parent="hitbox"]
+polygon = PackedVector2Array(-7, -24, -8, -24, -11, -14, -17, -14, -17, -2, -27, 2, -27, 3, -17, 5, -17, 18, -11, 18, -8, 24, -7, 24, -4, 18, 2, 18, 2, -14, -4, -14)
 
 [node name="hurtbox" type="Area2D" parent="."]
 visible = false
@@ -54,8 +53,8 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="collider" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_txvdo")
+position = Vector2(-2, -2)
+shape = SubResource("RectangleShape2D_nsj7a")
 
 [connection signal="timeout" from="move timer" to="." method="_on_movement_timer_timeout"]
 [connection signal="timeout" from="stun timer" to="." method="_on_stun_timer_timeout"]

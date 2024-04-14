@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dicw2htxld5ih"]
+
+[ext_resource type="Script" path="res://Scripts/SimonScript.gd" id="1_4c7ex"]
+[ext_resource type="Texture2D" uid="uid://bgepfgufxr7ie" path="res://Sprites/Simon/closed.png" id="2_d3pdg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scf7s"]
+size = Vector2(60, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qok8y"]
+size = Vector2(60, 36)
+
+[node name="Simon" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_4c7ex")
+
+[node name="move timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.7
+autostart = true
+
+[node name="attack cooldown" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="collider" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_scf7s")
+
+[node name="sprite root" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="sprite root"]
+texture = ExtResource("2_d3pdg")
+
+[node name="hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 16
+
+[node name="collider" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_qok8y")
+
+[connection signal="timeout" from="move timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]

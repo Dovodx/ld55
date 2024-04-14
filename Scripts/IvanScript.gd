@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var speed = 350.0
 var currentSpeed = speed
+var damage = 10.0
 
 var sprite: Sprite2D
 var spriteRoot: Node2D
@@ -34,10 +35,9 @@ func _ready():
 	attackTimer = get_node("attack timer")
 	fireTimer = get_node("fire timer")
 	cooldownTimer = get_node("attack cooldown")
-	
 	anim = get_node("AnimationPlayer")
-	#todo may need to change these, dmg definitely will differ
-	hitbox.area_entered.connect(player._on_enemy_hit)
+	
+	hitbox.area_entered.connect(player._hit_enemy.bind(damage))
 	hitbox.area_entered.connect(_on_enemy_hit)
 	anim.play("float")
 
@@ -91,10 +91,10 @@ func _on_animation_player_current_animation_changed(name):
 			hitbox.rotation = (target.global_position - hitbox.global_position).angle()
 		else:
 			hitbox.rotation = (savedTargetPos - hitbox.global_position).angle()
-		hitbox.visible = true
 		#todo sound
 		hitbox.set_deferred("monitoring", true)
 		hitbox.set_deferred("monitorable", true)
+		hitbox.visible = true
 		fireTimer.start()
 
 func _on_fire_timer_timeout():

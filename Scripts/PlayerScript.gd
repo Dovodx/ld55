@@ -11,6 +11,7 @@ var invulnerable = false
 var invulnTimer: Timer
 
 var crystalsCollected = 0
+var crystalsNeeded = 4
 var summonActive = false
 
 var spriteRoot: Node2D
@@ -27,6 +28,8 @@ var healthBar: ColorRect
 var pauseMenu: Control
 var pauseBg: Control
 var optionsMenu: Control
+
+signal hit_enemy(area, dmg)
 
 func _ready():
 	dead = false
@@ -62,7 +65,10 @@ func _ready():
 	
 	hud.get_node("in-game").visible = true
 	hud.get_node("dead").visible = false
-	#todo connect summon buttons to summon function
+	
+	hud.get_node("dead/retry").connect("pressed", _on_retry_pressed)
+	hud.get_node("dead/quit").connect("pressed", _on_quit_pressed)
+	
 	for button in hud.get_node("summon select").get_children():
 		if button.name == "bg":
 			continue
@@ -93,6 +99,10 @@ func closeOptionsMenu():
 	optionsMenu.visible = false
 	pauseMenu.visible = true
 
+func _on_retry_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/fightscene.tscn")
+
 func _on_quit_pressed():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
@@ -111,6 +121,7 @@ func _process(delta):
 	)
 
 func _physics_process(delta):
+	if dead: return
 	var movementVector = Vector2.ZERO
 	var dirH = Input.get_axis("left", "right")
 	if dirH:
@@ -127,7 +138,7 @@ func _physics_process(delta):
 		movementVector.y = dirV * -currentSpeed
 	
 	velocity = movementVector.limit_length(currentSpeed)
-	if !summonActive:
+	if !anim.current_animation == "hurt":
 		if movementVector.length() == 0:
 			anim.play("stand")
 		else:
@@ -145,9 +156,19 @@ func get_crystal(crystal):
 	crystal.set_deferred("monitorable", false)
 	crystalsCollected += 1
 	get_node("sounds/pickup").play()
-	if !summonActive and crystalsCollected == 4:
+	if !summonActive and crystalsCollected >= crystalsNeeded:
 		show_summon_menu()
 		crystalsCollected = 0
+		crystalsNeeded += 1
+		
+	var crystalUncollected = false
+	for c in get_node("/root/level/crystals").get_children():
+		if c.visible:
+			crystalUncollected = true
+			break
+	if !crystalUncollected:
+		get_node("/root/level/spawner").respawn_crystals()
+	hud.get_node("in-game/crystal text").text = "[right]" + str(crystalsCollected) + "/" + str(crystalsNeeded)
 
 func show_summon_menu():
 	get_tree().paused = true
@@ -164,11 +185,9 @@ func close_summon_menu():
 	get_tree().paused = false
 	hud.get_node("pause bg").visible = false
 	hud.get_node("summon select").visible = false
-	get_node("/root/level/spawner").respawn_crystals()
 
 func summon(monsterNum):
 	#todo restore summon effect, push enemies away
-	print("summoning number " + str(monsterNum))
 	var summonToSpawn = summons[monsterNum].instantiate()
 	summonToSpawn.global_position = global_position
 	get_tree().get_root().get_node("level/summons").add_child(summonToSpawn)
@@ -177,25 +196,25 @@ func summon(monsterNum):
 func _take_damage(body, dmg):
 	if invulnerable or body != get_node("."): return
 	get_node("sounds/hurt").play()
+	anim.play("hurt")
+	anim.queue("stand")
 	invulnerable = true
 	invulnTimer.start()
 	health -= dmg
 	healthBar.size.x = max((health as float / maxHealth) * 360.0, 0)
-	if health == 0:
+	if health <= 0:
 		dead = true
-		#todo show game over screen
 		visible = false
-		get_node("body collider").disabled = true
+		get_node("body collider").set_deferred("disabled", true)
+		pauseBg.visible = true
 		hud.get_node("dead").visible = true
-	#todo death, hurt anim
+	#todo death anim or effect?
 
 func _on_invuln_timer_timeout():
 	#todo invuln effect
 	invulnerable = false
 
-#todo dmg amount, make enemies have health
-func _on_enemy_hit(area):
-	#todo score
+func _hit_enemy(area, dmg):
 	if area.get_parent().get_parent().name == "enemies":
-		area.get_parent().die()
+		area.get_parent().take_damage(dmg)
 		get_node("sounds/kill").play()

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://25q8hox5ks6"]
+
+[ext_resource type="Script" path="res://Scripts/GorgScript.gd" id="1_r753f"]
+[ext_resource type="Texture2D" uid="uid://bkqi075re7ayq" path="res://Sprites/Gorg/rock.png" id="2_3rfxo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48aqh"]
+size = Vector2(47, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvhmk"]
+size = Vector2(49, 59)
+
+[node name="Gorg" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_r753f")
+
+[node name="move timer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_48aqh")
+
+[node name="sprite root" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="sprite root"]
+texture = ExtResource("2_3rfxo")
+
+[node name="hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 16
+monitoring = false
+monitorable = false
+
+[node name="collider" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_mvhmk")
+
+[connection signal="timeout" from="move timer" to="." method="_on_move_timer_timeout"]

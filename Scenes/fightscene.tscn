@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=39 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
@@ -8,9 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://cqs7ri0amr2c6" path="res://Prefabs/ivan.tscn" id="4_1q6ac"]
 [ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
 [ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Mr. Chompy/effect.png" id="4_vdgsq"]
+[ext_resource type="PackedScene" uid="uid://25q8hox5ks6" path="res://Prefabs/gorg.tscn" id="5_5f8gp"]
 [ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Mr. Chompy/stand 2.png" id="5_o1ioh"]
 [ext_resource type="Texture2D" uid="uid://nvb0ed5yc8n2" path="res://Sprites/Player/run 1.png" id="5_tmu08"]
 [ext_resource type="Texture2D" uid="uid://bmwhw1krgdgfr" path="res://Sprites/Player/run 3.png" id="6_7th03"]
+[ext_resource type="PackedScene" uid="uid://dicw2htxld5ih" path="res://Prefabs/simon.tscn" id="6_gq35v"]
 [ext_resource type="Texture2D" uid="uid://dkde3iqdjiop0" path="res://Sprites/Mr. Chompy/stand 1.png" id="7_hd0vu"]
 [ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Mr. Chompy/stand 3.png" id="9_quxqn"]
 [ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Mr. Chompy/stand 4.png" id="10_vdxjk"]
@@ -19,9 +21,12 @@
 [ext_resource type="AudioStream" uid="uid://80bm43jtsaua" path="res://Sounds/jump.wav" id="13_qhvna"]
 [ext_resource type="AudioStream" uid="uid://b7h8ccoa6p6m3" path="res://Sounds/summon v2.wav" id="14_7qc6o"]
 [ext_resource type="PackedScene" uid="uid://dpt8rqpxvm6xa" path="res://Prefabs/crystal.tscn" id="16_1oikx"]
+[ext_resource type="Texture2D" uid="uid://dbkoq2kfdrcy4" path="res://Sprites/Player/hurt.png" id="17_6451k"]
 [ext_resource type="PackedScene" uid="uid://cp8w68w5svo1f" path="res://Prefabs/enemy1.tscn" id="17_a1svn"]
 [ext_resource type="Script" path="res://Scripts/SpawnerScript.gd" id="18_125yl"]
 [ext_resource type="AudioStream" uid="uid://dqtx8nlafrxs7" path="res://Sounds/explode 4.wav" id="19_1jnxk"]
+[ext_resource type="PackedScene" uid="uid://5qmd1oevpk34" path="res://Prefabs/enemy2.tscn" id="25_fmu0g"]
+[ext_resource type="PackedScene" uid="uid://dr7krml2fyro3" path="res://Prefabs/enemy3.tscn" id="27_mo08n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpk3q"]
 size = Vector2(32, 32)
@@ -488,9 +493,26 @@ tracks/6/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_wdego"]
+resource_name = "hurt"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_6451k")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf16p"]
 _data = {
 "RESET": SubResource("Animation_0y8xc"),
+"hurt": SubResource("Animation_wdego"),
 "run": SubResource("Animation_ljafv"),
 "stand": SubResource("Animation_2b5es"),
 "summon": SubResource("Animation_o20gr"),
@@ -514,11 +536,12 @@ size = Vector2(20, 1000)
 position = Vector2(480, 270)
 
 [node name="player" type="CharacterBody2D" parent="."]
+visibility_layer = 2
 position = Vector2(480, 270)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_pqfpr")
-summons = Array[PackedScene]([ExtResource("3_78ko7"), ExtResource("4_1q6ac"), null, null, null])
+summons = Array[PackedScene]([ExtResource("3_78ko7"), ExtResource("4_1q6ac"), ExtResource("5_5f8gp"), ExtResource("6_gq35v"), null])
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
@@ -627,7 +650,7 @@ position = Vector2(928, 480)
 
 [node name="spawner" type="Node2D" parent="."]
 script = ExtResource("18_125yl")
-enemy1 = ExtResource("17_a1svn")
+enemies = Array[PackedScene]([ExtResource("17_a1svn"), ExtResource("25_fmu0g"), ExtResource("27_mo08n")])
 
 [node name="next level timer" type="Timer" parent="spawner"]
 process_callback = 0

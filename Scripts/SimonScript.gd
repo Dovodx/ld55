@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 var speed = 500.0
-var damage = 1.0
+var damage = 0.25
+var stunTime = 4.0
 
 var sprite: Sprite2D
 var spriteRoot: Node2D
@@ -10,6 +11,7 @@ var lastPhysTime = Time.get_ticks_usec()
 
 var hitbox: Area2D
 var target: Node2D = null
+var capturedEnemy: Node2D = null
 var player: Node2D
 
 func _ready():
@@ -24,7 +26,8 @@ func _ready():
 	hitbox.area_entered.connect(_on_enemy_hit)
 
 func _on_enemy_hit(area):
-	#todo score
+	#todo grab and hold enemy, not sure if enemy should be considered dead or have a limit to how much hp can be sapped
+	#heal player while munching on enemy
 	if area.get_parent().get_parent().name == "enemies":
 		hitbox.set_deferred("monitoring", false)
 		hitbox.set_deferred("monitorable", false)
@@ -44,12 +47,6 @@ func _process(delta):
 func _physics_process(delta):
 	velocity *= 0.99
 	sprite.flip_h = velocity.x < 0
-	
-	if is_on_wall():
-		if get_wall_normal().x != 0:
-			velocity.x *= -1
-		if get_wall_normal().y != 0:
-			velocity.y *= -1
 
 	move_and_slide()
 	

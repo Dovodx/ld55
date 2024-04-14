@@ -26,8 +26,10 @@ top down summoning survival:
     -die
     -enemy voice or something
     -Ivan (charge, fire)
+    -Gorg (slide)
+    -Simon (chomp, chew, spit, heal)
 
--------HANDLE PLAYER DEATH STUPID
+✔✔✔✔✔✔✔HANDLE PLAYER DEATH STUPID
 
 -background
 ✔randomize crystal locations/fix crystal and enemy spawning
@@ -38,20 +40,27 @@ top down summoning survival:
     -summon descriptions when you highlight each button
 -more summons
     ✔rework chompy to live on his own: chomp around being a good attack monster
-    -Ivan: eyeball that shoots a laser that goes fullscreen (weakness: either limited damage or crowd control)
-        -just need that extra dmg, parameterize dealing damage to enemies, give them health
-    -Gorg: charges straight into enemies, knocking them around if they don't die
+    ✔Ivan: eyeball that shoots a laser that goes fullscreen (weakness: either limited damage or crowd control)
+        ✔just need that extra dmg, parameterize dealing damage to enemies, give them health
+        -no pierce, use raycast to avoid nuking all enemies at once?
+    ✔Gorg: charges straight into enemies, knocking them around if they don't die
+        ✔push mechanic
     -Simon: grabs one enemy at a time, draining their life and giving it to you (weakness, doesn't kill efficiently, heals slowly)
-        -deal 0.25dmg every 0.5s, send health to player
+        -deal 0.25dmg every 0.5s/1s?, send health to player
         -grab enemy and hold them in place while sapping (too much? OP? would make high-health enemies trivial, maybe limit grab time)
     -Smog: a cloud of smoke that slows down enemies within, making them easier to avoid and hit
     -stretch goal: ultimate summon that sacrifices your other ones or requires each to be summoned at least once
--enemy2: move only in cardinal directions
--enemy3: DVD logo
--some enemy needs more health to make chompy not as braindead, give Ivan more of a purpose with his upcoming extra damage
+-more enemies
+    -move only in cardinal directions?
+    ✔DVD logo (sort of)
+    ✔big slow guy with more health
+    ✔show enemy healthbars
 -possibly use space to summon at will rather than requiring the player to summon immediately when grabbing a crystal (might not be needed with pushback effect?)
--require more crystals to summon once you have a few so that you can't spam as much
--spawn more enemies and tougher enemies so that summons don't instantly overrun the game lmao
+✔require more crystals to summon once you have a few so that you can't spam as much
+✔show num crystals in hud
+✔spawn more enemies and tougher enemies so that summons don't instantly overrun the game lmao
+-make sure player always draws on top
+-dodge button?
 
 ✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
 -fix menu button sizing

@@ -1,21 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp8w68w5svo1f"]
+[gd_scene load_steps=6 format=3 uid="uid://dr7krml2fyro3"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy1Script.gd" id="1_e251e"]
-[ext_resource type="Texture2D" uid="uid://cw054e4pm4yxg" path="res://Sprites/enemy1/enemy.png" id="2_aai8d"]
+[ext_resource type="Script" path="res://Scripts/Enemy3Script.gd" id="1_y4g47"]
+[ext_resource type="Texture2D" uid="uid://be5vhvwx3lmub" path="res://Sprites/enemy3/enemy3.png" id="2_32ki2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_td7l3"]
-size = Vector2(26, 26)
+[sub_resource type="CircleShape2D" id="CircleShape2D_jc1di"]
+radius = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_txvdo"]
-size = Vector2(26, 26)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1th1w"]
+radius = 29.0
 
-[node name="enemy1" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_di5yj"]
+radius = 32.0
+
+[node name="enemy3" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
-script = ExtResource("1_e251e")
+script = ExtResource("1_y4g47")
 
 [node name="move timer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 0.3
+one_shot = true
 
 [node name="stun timer" type="Timer" parent="."]
 process_callback = 0
@@ -24,20 +29,19 @@ one_shot = true
 [node name="sprite root" type="Node2D" parent="."]
 
 [node name="sprite" type="Sprite2D" parent="sprite root"]
-texture = ExtResource("2_aai8d")
+texture = ExtResource("2_32ki2")
 
 [node name="healthbar" type="ColorRect" parent="sprite root"]
 offset_left = -15.0
-offset_top = -17.0
+offset_top = -37.0
 offset_right = 15.0
-offset_bottom = -15.0
+offset_bottom = -35.0
 mouse_filter = 2
 color = Color(1, 0, 0, 1)
 
 [node name="collider" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_td7l3")
+shape = SubResource("CircleShape2D_jc1di")
 
 [node name="hitbox" type="Area2D" parent="."]
 visible = false
@@ -45,8 +49,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="collider" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_txvdo")
+shape = SubResource("CircleShape2D_1th1w")
 
 [node name="hurtbox" type="Area2D" parent="."]
 visible = false
@@ -54,8 +57,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="collider" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_txvdo")
+shape = SubResource("CircleShape2D_di5yj")
 
 [connection signal="timeout" from="move timer" to="." method="_on_movement_timer_timeout"]
 [connection signal="timeout" from="stun timer" to="." method="_on_stun_timer_timeout"]

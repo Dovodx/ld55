@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-var maxHealth = 1.0
+var maxHealth = 10.0
 var health = maxHealth
 var dead = false
 
-const SPEED = 500.0
-var damage = 10
+const SPEED = 110.0
+var damage = 15
 var angleVariationDeg = 30
 var moveTimer: Timer
 var stunTimer: Timer
@@ -54,7 +54,6 @@ func _process(delta):
 
 func _physics_process(delta):
 	if !dead:
-		velocity *= 0.99
 		sprite.flip_h = velocity.x > 0
 	else:
 		velocity = Vector2.ZERO
@@ -71,8 +70,10 @@ func _physics_process(delta):
 	spritePositions[1] = global_position
 	lastPhysTime = Time.get_ticks_usec()
 
+#Note: This enemy's movement timer is one shot because its velocity should stay the same once it starts moving
 func _on_movement_timer_timeout():
-	velocity = (player.global_position - global_position).normalized().rotated(deg_to_rad(randi_range(-angleVariationDeg, angleVariationDeg) / 2.0)) * SPEED
+	var fixedAngle = Vector2.RIGHT.rotated(roundi(rad_to_deg(randi_range(0, 360)) / 90.0) * 90)
+	velocity = fixedAngle * SPEED
 
 func stun(time):
 	moveTimer.stop()
@@ -91,11 +92,6 @@ func die():
 	get_node("/root/level/spawner").enemy_dead()
 	dead = true
 	call_deferred("queue_free")
-	#hitbox.set_deferred("monitoring", false)
-	#hitbox.set_deferred("monitorable", false)
-	#hurtbox.set_deferred("monitoring", false)
-	#hurtbox.set_deferred("monitorable", false)
-	#visible = false
 
 func _on_stun_timer_timeout():
 	moveTimer.start()

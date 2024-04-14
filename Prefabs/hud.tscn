@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bo153vm1kdfnp"]
+[gd_scene load_steps=5 format=3 uid="uid://bo153vm1kdfnp"]
 
 [ext_resource type="Theme" uid="uid://da5nolxjbph02" path="res://ui_theme.tres" id="2_8a2yb"]
 [ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Mr. Chompy/effect.png" id="2_ewl4b"]
+[ext_resource type="Texture2D" uid="uid://c25tt83saqagf" path="res://Sprites/crystal v2.png" id="2_kcutw"]
 [ext_resource type="PackedScene" uid="uid://d3x2t7bdi076b" path="res://Prefabs/options_menu.tscn" id="4_vyxv8"]
 
 [node name="HUD" type="CanvasLayer"]
@@ -23,20 +24,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_8a2yb")
+
+[node name="bg" type="ColorRect" parent="in-game"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
 
 [node name="health bg" type="ColorRect" parent="in-game"]
 layout_mode = 0
 offset_top = 512.0
 offset_right = 360.0
 offset_bottom = 540.0
-color = Color(0.188235, 0, 0, 1)
+color = Color(0.321569, 0, 0, 1)
 
 [node name="health fill" type="ColorRect" parent="in-game"]
 layout_mode = 0
 offset_top = 512.0
 offset_right = 360.0
 offset_bottom = 540.0
-color = Color(1, 0, 0, 1)
+color = Color(0.419608, 0.0901961, 0.921569, 1)
+
+[node name="crystal text" type="RichTextLabel" parent="in-game"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 382.0
+offset_top = -28.0
+offset_right = -475.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[right]0/4"
+scroll_active = false
+
+[node name="crystal icon" type="TextureRect" parent="in-game"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -471.0
+offset_top = -27.0
+offset_right = -445.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_kcutw")
+expand_mode = 1
 
 [node name="summon select" type="Control" parent="."]
 process_mode = 3
@@ -153,6 +198,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_8a2yb")
+
+[node name="title" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -121.0
+offset_right = 100.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]You Died"
+
+[node name="retry" type="Button" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -53.0
+offset_right = 70.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("2_8a2yb")
+theme_override_font_sizes/font_size = 24
+text = "Retry"
+
+[node name="quit" type="Button" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 7.0
+offset_right = 70.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 15)
+theme = ExtResource("2_8a2yb")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
 
 [node name="pause menu" type="Control" parent="."]
 process_mode = 2

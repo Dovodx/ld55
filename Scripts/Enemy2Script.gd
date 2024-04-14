@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-var maxHealth = 1.0
+var maxHealth = 15.0
 var health = maxHealth
 var dead = false
 
-const SPEED = 500.0
-var damage = 10
+const SPEED = 400.0
+var damage = 15
 var angleVariationDeg = 30
 var moveTimer: Timer
 var stunTimer: Timer
@@ -13,7 +13,6 @@ var player: Node2D
 
 var sprite: Sprite2D
 var spriteRoot: Node2D
-var scaredSprite = load("res://Sprites/enemy1/enemy1 scared.png")
 var spritePositions = [Vector2.ZERO, Vector2.ZERO]
 var lastPhysTime = Time.get_ticks_usec()
 
@@ -32,7 +31,6 @@ func _ready():
 	spriteRoot = get_node("sprite root")
 	spritePositions[0] = spriteRoot.global_position
 	spritePositions[1] = spriteRoot.global_position
-	
 	healthbar = get_node("sprite root/healthbar")
 	
 	hitbox = get_node("hitbox")
@@ -54,11 +52,11 @@ func _process(delta):
 
 func _physics_process(delta):
 	if !dead:
-		velocity *= 0.99
+		velocity *= 0.98
 		sprite.flip_h = velocity.x > 0
 	else:
 		velocity = Vector2.ZERO
-	
+
 	if is_on_wall() and stunTimer.is_stopped():
 		if get_wall_normal().x != 0:
 			velocity.x *= -1
@@ -91,11 +89,6 @@ func die():
 	get_node("/root/level/spawner").enemy_dead()
 	dead = true
 	call_deferred("queue_free")
-	#hitbox.set_deferred("monitoring", false)
-	#hitbox.set_deferred("monitorable", false)
-	#hurtbox.set_deferred("monitoring", false)
-	#hurtbox.set_deferred("monitorable", false)
-	#visible = false
 
 func _on_stun_timer_timeout():
 	moveTimer.start()

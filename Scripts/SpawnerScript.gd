@@ -1,6 +1,6 @@
 extends Node
 
-@export var enemy1: PackedScene
+@export var enemies: Array[PackedScene]
 
 var levelNum = 0
 var enemyCount = 0
@@ -23,7 +23,9 @@ func _ready():
 	
 func spawn_enemy():
 	enemyCount += 1
-	var enemyToSpawn = enemy1.instantiate()
+	var highestEnemyNum = clamp(levelNum / 4, 0, enemies.size() - 1)
+	var enemyNum = randi_range(0, highestEnemyNum)
+	var enemyToSpawn = enemies[enemyNum].instantiate()
 	#todo ensure enemies spawn away from player and within level bounds
 	enemyToSpawn.global_position = get_point_away_from_player()
 	get_tree().get_root().get_node("level/enemies").add_child(enemyToSpawn)
@@ -74,6 +76,7 @@ func get_point_away_from_player():
 	pos.x *= 960 * xroll
 	pos.y *= 540 * yroll
 	pos += screenCenter
+	pos = pos.clamp(Vector2(boundsOffset, boundsOffset), Vector2(960 - boundsOffset, 540 - 28 - boundsOffset))
 	
 	return pos
 
