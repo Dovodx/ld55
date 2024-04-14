@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=32 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
 [ext_resource type="Texture2D" uid="uid://duiwftba68fb5" path="res://Sprites/Player/stand 1.png" id="2_jnw6a"]
 [ext_resource type="Texture2D" uid="uid://c2slcior2nwi2" path="res://Sprites/Player/stand 2.png" id="3_4n220"]
+[ext_resource type="PackedScene" uid="uid://c20jxxewgy7e" path="res://Prefabs/mr_chompy.tscn" id="3_78ko7"]
 [ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
 [ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Mr. Chompy/effect.png" id="4_vdgsq"]
 [ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Mr. Chompy/stand 2.png" id="5_o1ioh"]
@@ -113,34 +114,22 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath(".:currentSpeed")
+tracks/7/path = NodePath("sprite root/summon effect:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [200.0]
+"update": 1,
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite root/summon effect:visible")
+tracks/8/path = NodePath("sprite root/summon effect:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("sprite root/summon effect:self_modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -386,34 +375,22 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath(".:currentSpeed")
+tracks/6/path = NodePath("sprite root/summon effect:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite root/summon effect:visible")
+tracks/7/path = NodePath("sprite root/summon effect:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("sprite root/summon effect:self_modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.35, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
@@ -509,18 +486,6 @@ tracks/6/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath(".:currentSpeed")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [500.0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf16p"]
 _data = {
@@ -552,15 +517,10 @@ position = Vector2(480, 270)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_pqfpr")
-currentSpeed = 200.0
-summons = Array[PackedScene]([null, null, null, null, null])
+summons = Array[PackedScene]([ExtResource("3_78ko7"), null, null, null, null])
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
-one_shot = true
-
-[node name="level reset" type="Timer" parent="player"]
-wait_time = 0.2
 one_shot = true
 
 [node name="sprite root" type="Node2D" parent="player"]
@@ -660,12 +620,18 @@ position = Vector2(32, 480)
 [node name="crystal4" parent="crystals" instance=ExtResource("16_1oikx")]
 position = Vector2(928, 480)
 
+[node name="summons" type="Node2D" parent="."]
+
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="spawner" type="Node2D" parent="."]
 script = ExtResource("18_125yl")
 enemy1 = ExtResource("17_a1svn")
 
+[node name="next level timer" type="Timer" parent="spawner"]
+process_callback = 0
+one_shot = true
+
 [connection signal="timeout" from="player/invuln timer" to="player" method="_on_invuln_timer_timeout"]
-[connection signal="timeout" from="player/level reset" to="player" method="_on_level_reset_timeout"]
 [connection signal="area_entered" from="player/hitbox" to="player" method="_on_enemy_hit"]
+[connection signal="timeout" from="spawner/next level timer" to="spawner" method="_on_next_level_timer_timeout"]

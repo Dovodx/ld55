@@ -28,13 +28,13 @@ top down summoning survival:
     -enemy voice or something
     -all enemies clear/level up
 -background
--randomize crystal locations
--autonomous summon separate from player
+✔randomize crystal locations/fix crystal and enemy spawning
+✔autonomous summon separate from player
 -choose between different summons with different properties, could maybe keep riding summon with a limit?
-    -summon select menu
+    ✔summon select menu
     -push enemies away when summoning, bigger summon visual
 -more summons
-    -rework chompy to live on his own: chomp around being a good attack monster
+    ✔rework chompy to live on his own: chomp around being a good attack monster
     -Ivan: eyeball that shoots a laser that goes fullscreen (weakness: either limited damage or crowd control)
     -Gorg: charges straight into enemies, knocking them around if they don't die
     -Simon: grabs one enemy at a time, draining their life and giving it to you (weakness, doesn't kill efficiently, heals slowly)
@@ -44,4 +44,4 @@ top down summoning survival:
 -enemy3: DVD logo
 ✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
 -fix menu button sizing
--concept going forward: enemy waves come with time, new waves do not wait for you to finish the previous ones
+✔concept going forward: enemy waves come with time, new waves do not wait for you to finish the previous ones

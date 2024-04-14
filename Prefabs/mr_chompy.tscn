@@ -10,7 +10,7 @@
 size = Vector2(56, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvhmk"]
-size = Vector2(44, 41)
+size = Vector2(58, 41)
 
 [sub_resource type="Animation" id="Animation_k6lfu"]
 length = 0.001
@@ -55,9 +55,15 @@ _data = {
 collision_layer = 2
 script = ExtResource("1_p7kgx")
 
-[node name="attack timer" type="Timer" parent="."]
+[node name="move timer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 0.7
 autostart = true
+
+[node name="attack cooldown" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -70,9 +76,11 @@ shape = SubResource("RectangleShape2D_48aqh")
 texture = ExtResource("1_kmxrd")
 
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
 
 [node name="collider" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(6, 4.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_mvhmk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -81,4 +89,5 @@ libraries = {
 }
 autoplay = "moving"
 
-[connection signal="timeout" from="attack timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="move timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-
-const SPEED = 550.0
+const SPEED = 500.0
 var dmgAmount = 10
 var angleVariationDeg = 30
 var movementTimer: Timer
@@ -15,8 +14,6 @@ var lastPhysTime = Time.get_ticks_usec()
 
 var hitbox: Area2D
 var hurtbox: Area2D
-
-signal take_damage(dmg)
 
 func _ready():
 	dead = false
@@ -47,7 +44,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	if !dead:
-		velocity *= 0.98
+		velocity *= 0.99
 		sprite.flip_h = velocity.x > 0
 	else:
 		velocity = Vector2.ZERO

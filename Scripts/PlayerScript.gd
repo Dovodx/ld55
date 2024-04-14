@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-@export var currentSpeed = SPEED
+var currentSpeed = SPEED
 @export var summons: Array[PackedScene]
 
 var maxHealth = 100
@@ -12,8 +12,6 @@ var invulnTimer: Timer
 
 var crystalsCollected = 0
 var summonActive = false
-var canPickup = true
-var levelResetTimer: Timer
 
 var spriteRoot: Node2D
 var spritePositions = [Vector2.ZERO, Vector2.ZERO]
@@ -39,7 +37,6 @@ func _ready():
 	hud = get_node("/root/level/HUD")
 	healthBar = hud.get_node("in-game/health fill")
 	invulnTimer = get_node("invuln timer")
-	levelResetTimer = get_node("level reset")
 	
 	spriteRoot = get_node("sprite root")
 	spritePositions[0] = spriteRoot.global_position
@@ -73,10 +70,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if dead: return
-	if event is InputEventMouseButton:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
-	elif event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	if event.is_action_pressed("ui_cancel"):
 		pauseGame()
 		#todo unpause with esc
 
@@ -84,14 +78,12 @@ func pauseGame():
 	pauseBg.visible = true
 	pauseMenu.visible = true
 	get_tree().paused = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func unpauseGame():
 	pauseBg.visible = false
 	optionsMenu.visible = false
 	pauseMenu.visible = false
 	get_tree().paused = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 func openOptionsMenu():
 	optionsMenu.visible = true
@@ -110,8 +102,6 @@ func next_level():
 	currentSpeed = SPEED
 	invulnerable = true
 	invulnTimer.start()
-	canPickup = false
-	levelResetTimer.start()
 
 func _process(delta):
 	var timeDiff = (Time.get_ticks_usec() - lastPhysTime) / 1000000.0
@@ -150,7 +140,6 @@ func _physics_process(delta):
 	lastPhysTime = Time.get_ticks_usec()
 
 func get_crystal(crystal):
-	if !canPickup: return
 	crystal.visible = false
 	crystal.set_deferred("monitoring", false)
 	crystal.set_deferred("monitorable", false)
@@ -161,9 +150,7 @@ func get_crystal(crystal):
 		crystalsCollected = 0
 
 func show_summon_menu():
-	canPickup = false
 	get_tree().paused = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	hud.get_node("pause bg").visible = true
 	hud.get_node("summon select").visible = true
 	
@@ -175,16 +162,20 @@ func show_summon_menu():
 
 func close_summon_menu():
 	get_tree().paused = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	hud.get_node("pause bg").visible = false
 	hud.get_node("summon select").visible = false
+	get_node("/root/level/spawner").respawn_crystals()
 
 func summon(monsterNum):
+	#todo restore summon effect, push enemies away
 	print("summoning number " + str(monsterNum))
+	var summonToSpawn = summons[monsterNum].instantiate()
+	summonToSpawn.global_position = global_position
+	get_tree().get_root().get_node("level/summons").add_child(summonToSpawn)
 	close_summon_menu()
 
 func _take_damage(body, dmg):
-	if invulnerable: return
+	if invulnerable or body != get_node("."): return
 	get_node("sounds/hurt").play()
 	invulnerable = true
 	invulnTimer.start()
@@ -202,11 +193,9 @@ func _on_invuln_timer_timeout():
 	#todo invuln effect
 	invulnerable = false
 
+#todo dmg amount, make enemies have health
 func _on_enemy_hit(area):
 	#todo score
 	if area.get_parent().get_parent().name == "enemies":
 		area.get_parent().die()
 		get_node("sounds/kill").play()
-
-func _on_level_reset_timeout():
-	canPickup = true
