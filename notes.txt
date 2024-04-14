@@ -8,7 +8,7 @@ top down summoning survival:
     ✔stand animation
     ✔running
     ✔summon monster
-    -hurt
+    ✔hurt
     -dead
     ✔summon effect
 -song
@@ -27,7 +27,7 @@ top down summoning survival:
     -enemy voice or something
     -Ivan (charge, fire)
     -Gorg (slide)
-    -Simon (chomp, chew, spit, heal)
+    -Simon (move/hop, chomp, chew, spit, heal)
 
 ✔✔✔✔✔✔✔HANDLE PLAYER DEATH STUPID
 
@@ -55,7 +55,7 @@ top down summoning survival:
     ✔DVD logo (sort of)
     ✔big slow guy with more health
     ✔show enemy healthbars
--possibly use space to summon at will rather than requiring the player to summon immediately when grabbing a crystal (might not be needed with pushback effect?)
+
 ✔require more crystals to summon once you have a few so that you can't spam as much
 ✔show num crystals in hud
 ✔spawn more enemies and tougher enemies so that summons don't instantly overrun the game lmao
@@ -65,4 +65,5 @@ top down summoning survival:
 ✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
 -fix menu button sizing
 ✔concept going forward: enemy waves come with time, new waves do not wait for you to finish the previous ones
+-possibly use space to summon at will rather than requiring the player to summon immediately when grabbing a crystal (might not be needed with pushback effect?)
 -maybe different font that better matches occult-ish theme?

@@ -75,6 +75,8 @@ func _on_movement_timer_timeout():
 	velocity = (player.global_position - global_position).normalized().rotated(deg_to_rad(randi_range(-angleVariationDeg, angleVariationDeg) / 2.0)) * SPEED
 
 func stun(time):
+	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
 	moveTimer.stop()
 	stunTimer.wait_time = time
 	stunTimer.start()
@@ -98,4 +100,6 @@ func die():
 	#visible = false
 
 func _on_stun_timer_timeout():
+	hitbox.set_deferred("monitoring", true)
+	hitbox.set_deferred("monitorable", true)
 	moveTimer.start()

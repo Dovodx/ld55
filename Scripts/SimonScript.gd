@@ -13,6 +13,9 @@ var hitbox: Area2D
 var target: Node2D = null
 var capturedEnemy: Node2D = null
 var player: Node2D
+var moveTimer: Timer
+
+var anim: AnimationPlayer
 
 func _ready():
 	sprite = get_node("sprite root/sprite")
@@ -20,18 +23,31 @@ func _ready():
 	spritePositions[0] = global_position
 	spritePositions[1] = global_position
 	
+	moveTimer = get_node("move timer")
+	anim = get_node("AnimationPlayer")
 	hitbox = get_node("hitbox")
 	player = get_node("/root/level/player")
 	hitbox.area_entered.connect(player._hit_enemy.bind(damage))
 	hitbox.area_entered.connect(_on_enemy_hit)
+	
+	anim.play("move")
 
 func _on_enemy_hit(area):
 	#todo grab and hold enemy, not sure if enemy should be considered dead or have a limit to how much hp can be sapped
 	#heal player while munching on enemy
-	if area.get_parent().get_parent().name == "enemies":
+	if capturedEnemy == null and area.get_parent().get_parent().name == "enemies":
 		hitbox.set_deferred("monitoring", false)
 		hitbox.set_deferred("monitorable", false)
-		get_node("attack cooldown").start()
+		capturedEnemy = area.get_parent()
+		capturedEnemy.visible = false
+		capturedEnemy.stun(stunTime)
+		capturedEnemy.velocity = Vector2.ZERO
+		anim.play("munch")
+
+func drain_health():
+	if capturedEnemy == null or capturedEnemy.dead:
+		find_new_target()
+		moveTimer.start()
 
 func _on_attack_cooldown_timeout():
 	hitbox.set_deferred("monitoring", true)
@@ -54,7 +70,7 @@ func _physics_process(delta):
 	spritePositions[1] = global_position
 	lastPhysTime = Time.get_ticks_usec()
 
-func _on_attack_timer_timeout():
+func _on_move_timer_timeout():
 	if target == null or target == player:
 		find_new_target()
 	var attackDir = Vector2.RIGHT
