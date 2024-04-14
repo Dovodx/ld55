@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 100.0
-var slowFactor = 0.2 #Limit enemies inside to thier top speed multiplied by this
+var slowFactor = 0.18 #Limit enemies inside to thier top speed multiplied by this
 
 var sprite: Sprite2D
 var spriteRoot: Node2D

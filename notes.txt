@@ -30,13 +30,13 @@ top down summoning survival:
 
 ✔✔✔✔✔✔✔HANDLE PLAYER DEATH STUPID
 
--background
+✔background
 ✔randomize crystal locations/fix crystal and enemy spawning
 ✔autonomous summon separate from player
--choose between different summons with different properties, could maybe keep riding summon with a limit?
+✔choose between different summons with different properties
     ✔summon select menu
     ✔push enemies away when summoning, bigger summon visual
-    -summon descriptions when you highlight each button
+    ✔summon descriptions when you highlight each button
 ✔more summons
     ✔rework chompy to live on his own: chomp around being a good attack monster
     ✔Ivan: eyeball that shoots a laser that goes fullscreen (weakness: either limited damage or crowd control)
@@ -52,7 +52,6 @@ top down summoning survival:
     ✔Smog: a cloud of smoke that slows down enemies within, making them easier to avoid and hit
     -stretch goal: ultimate summon that sacrifices your other ones or requires each to be summoned at least once
 ✔more enemies
-    -move only in cardinal directions?
     ✔DVD logo (sort of)
     ✔big slow guy with more health
     ✔show enemy healthbars

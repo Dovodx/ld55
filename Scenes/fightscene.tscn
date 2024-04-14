@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=41 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dqtx8nlafrxs7" path="res://Sounds/explode 4.wav" id="19_1jnxk"]
 [ext_resource type="PackedScene" uid="uid://5qmd1oevpk34" path="res://Prefabs/enemy2.tscn" id="25_fmu0g"]
 [ext_resource type="PackedScene" uid="uid://dr7krml2fyro3" path="res://Prefabs/enemy3.tscn" id="27_mo08n"]
+[ext_resource type="Texture2D" uid="uid://bx2b7cvlcdfce" path="res://Sprites/background.png" id="29_hnk0p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpk3q"]
 size = Vector2(32, 32)
@@ -583,6 +584,11 @@ enemies = Array[PackedScene]([ExtResource("17_a1svn"), ExtResource("25_fmu0g"), 
 [node name="next level timer" type="Timer" parent="spawner"]
 process_callback = 0
 one_shot = true
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(480, 270)
+texture = ExtResource("29_hnk0p")
 
 [connection signal="timeout" from="player/invuln timer" to="player" method="_on_invuln_timer_timeout"]
 [connection signal="area_entered" from="player/hitbox" to="player" method="_on_enemy_hit"]

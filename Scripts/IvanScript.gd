@@ -44,7 +44,6 @@ func _on_enemy_hit(area):
 	#todo allow for multiple hits probably
 	if area.get_parent().get_parent().name == "enemies":
 		area.get_parent().take_damage(damage)
-		get_node("hit").play()
 		
 		hitbox.set_deferred("monitoring", false)
 		hitbox.set_deferred("monitorable", false)

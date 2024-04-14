@@ -90,7 +90,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.25, 0.35, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -2.8), Vector2(0, -4), Vector2(0, -2.8), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -6), Vector2(0, -8), Vector2(0, -6), Vector2(0, 0)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -243,17 +243,16 @@ libraries = {
 
 [node name="hop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_tmsv0")
-volume_db = -5.0
+volume_db = -13.0
 bus = &"SFX"
 
 [node name="open" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_fikmt")
-volume_db = -5.0
 bus = &"SFX"
 
 [node name="munch" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_81xxi")
-volume_db = -5.0
+volume_db = -9.0
 bus = &"SFX"
 
 [connection signal="timeout" from="lunge timer" to="." method="_on_lunge_timer_timeout"]
