@@ -55,7 +55,7 @@ func _process(delta):
 	)
 
 func _physics_process(delta):
-	velocity *= 0.98
+	velocity *= 0.92
 	sprite.flip_h = velocity.x < 0
 
 	move_and_slide()
@@ -68,6 +68,7 @@ func _on_move_timer_timeout():
 	#Move towards player to slightly improve shot positioning
 	var moveDir = global_position.direction_to(player.global_position).rotated(deg_to_rad(randi_range(-35, 35)))
 	velocity = moveDir * speed
+	anim.play("float")
 
 func _on_attack_timer_timeout():
 	#angle and fire laser
@@ -109,7 +110,6 @@ func _on_attack_cooldown_timeout():
 
 func find_new_target():
 	#search for the nearest enemy, LASE
-	anim.play("float")
 	var lowestDistance = 999999999999
 	var newTarget: Node2D
 	for enemy in get_node("/root/level/enemies").get_children():

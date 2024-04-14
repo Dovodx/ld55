@@ -12,7 +12,6 @@ top down summoning survival:
     -dead
     ✔summon effect
 -song
--maybe summon smaller guys too?
 -interpolation
     ✔player character
     ✔enemy
@@ -22,11 +21,11 @@ top down summoning survival:
     ✔hurt
     ✔summon
     ✔jumping aboard
-    -summon sounds (running, chomping)
+    -Mr. Chompy (running, chomping)
     ✔kill enemy
     -die
     -enemy voice or something
-    -all enemies clear/level up
+    -Ivan (charge, fire)
 
 -------HANDLE PLAYER DEATH STUPID
 
@@ -36,15 +35,25 @@ top down summoning survival:
 -choose between different summons with different properties, could maybe keep riding summon with a limit?
     ✔summon select menu
     -push enemies away when summoning, bigger summon visual
+    -summon descriptions when you highlight each button
 -more summons
     ✔rework chompy to live on his own: chomp around being a good attack monster
     -Ivan: eyeball that shoots a laser that goes fullscreen (weakness: either limited damage or crowd control)
+        -just need that extra dmg, parameterize dealing damage to enemies, give them health
     -Gorg: charges straight into enemies, knocking them around if they don't die
     -Simon: grabs one enemy at a time, draining their life and giving it to you (weakness, doesn't kill efficiently, heals slowly)
+        -deal 0.25dmg every 0.5s, send health to player
+        -grab enemy and hold them in place while sapping (too much? OP? would make high-health enemies trivial, maybe limit grab time)
     -Smog: a cloud of smoke that slows down enemies within, making them easier to avoid and hit
     -stretch goal: ultimate summon that sacrifices your other ones or requires each to be summoned at least once
 -enemy2: move only in cardinal directions
 -enemy3: DVD logo
+-some enemy needs more health to make chompy not as braindead, give Ivan more of a purpose with his upcoming extra damage
+-possibly use space to summon at will rather than requiring the player to summon immediately when grabbing a crystal (might not be needed with pushback effect?)
+-require more crystals to summon once you have a few so that you can't spam as much
+-spawn more enemies and tougher enemies so that summons don't instantly overrun the game lmao
+
 ✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
 -fix menu button sizing
 ✔concept going forward: enemy waves come with time, new waves do not wait for you to finish the previous ones
+-maybe different font that better matches occult-ish theme?
