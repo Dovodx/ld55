@@ -72,7 +72,7 @@ func find_new_target():
 	var lowestDistance = 999999999999
 	var newTarget: Node2D
 	for enemy in get_node("/root/level/enemies").get_children():
-		if enemy.dead:
+		if enemy.dead or !enemy.get_node("sprite root").visible:
 			continue
 		var distance = global_position.distance_squared_to(enemy.global_position)
 		if distance < lowestDistance:

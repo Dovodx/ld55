@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dicw2htxld5ih"]
+[gd_scene load_steps=12 format=3 uid="uid://dicw2htxld5ih"]
 
 [ext_resource type="Script" path="res://Scripts/SimonScript.gd" id="1_4c7ex"]
 [ext_resource type="Texture2D" uid="uid://bgepfgufxr7ie" path="res://Sprites/Simon/closed.png" id="2_d3pdg"]
+[ext_resource type="Texture2D" uid="uid://crwgndnh4tttu" path="res://Sprites/Simon/open.png" id="3_4a76b"]
+[ext_resource type="Texture2D" uid="uid://wx80prjprumv" path="res://Sprites/Simon/munch.png" id="4_2plui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_scf7s"]
 size = Vector2(60, 36)
@@ -9,19 +11,154 @@ size = Vector2(60, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qok8y"]
 size = Vector2(60, 36)
 
+[sub_resource type="Animation" id="Animation_22ql7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_d3pdg")]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite root/sprite:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite root/sprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite root/sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0hnuq"]
+resource_name = "move"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_d3pdg")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite root/sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2.8), Vector2(0, -4), Vector2(0, -2.8), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uqs2f"]
+resource_name = "munch"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_d3pdg"), ExtResource("4_2plui")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"drain_health"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_odtr6"]
+resource_name = "bite"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite root/sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_4a76b")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_62qj0"]
+_data = {
+"RESET": SubResource("Animation_22ql7"),
+"move": SubResource("Animation_0hnuq"),
+"munch": SubResource("Animation_uqs2f"),
+"open": SubResource("Animation_odtr6")
+}
+
 [node name="Simon" type="CharacterBody2D"]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_4c7ex")
 
-[node name="move timer" type="Timer" parent="."]
+[node name="lunge timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.7
+wait_time = 1.5
+one_shot = true
 autostart = true
 
-[node name="attack cooldown" type="Timer" parent="."]
+[node name="bite timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.5
 one_shot = true
 
 [node name="collider" type="CollisionShape2D" parent="."]
@@ -38,12 +175,17 @@ texture = ExtResource("2_d3pdg")
 visible = false
 collision_layer = 8
 collision_mask = 16
+monitoring = false
+monitorable = false
 
 [node name="collider" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_qok8y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_62qj0")
+}
 
-[connection signal="timeout" from="move timer" to="." method="_on_move_timer_timeout"]
-[connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="lunge timer" to="." method="_on_lunge_timer_timeout"]
+[connection signal="timeout" from="bite timer" to="." method="_on_bite_timer_timeout"]

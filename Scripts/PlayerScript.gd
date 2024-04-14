@@ -4,8 +4,8 @@ const SPEED = 300.0
 var currentSpeed = SPEED
 @export var summons: Array[PackedScene]
 
-var maxHealth = 100
-var health = 100
+var maxHealth = 100.0
+var health = 100.0
 var dead = false
 var invulnerable = false
 var invulnTimer: Timer
@@ -193,6 +193,11 @@ func summon(monsterNum):
 	get_tree().get_root().get_node("level/summons").add_child(summonToSpawn)
 	close_summon_menu()
 
+func heal(amount):
+	if dead: return
+	health = clamp(health + amount, 0, maxHealth)
+	update_healthbar()
+
 func _take_damage(body, dmg):
 	if invulnerable or body != get_node("."): return
 	get_node("sounds/hurt").play()
@@ -201,7 +206,7 @@ func _take_damage(body, dmg):
 	invulnerable = true
 	invulnTimer.start()
 	health -= dmg
-	healthBar.size.x = max((health as float / maxHealth) * 360.0, 0)
+	update_healthbar()
 	if health <= 0:
 		dead = true
 		visible = false
@@ -209,6 +214,9 @@ func _take_damage(body, dmg):
 		pauseBg.visible = true
 		hud.get_node("dead").visible = true
 	#todo death anim or effect?
+
+func update_healthbar():
+	healthBar.size.x = max((health as float / maxHealth) * 360.0, 0)
 
 func _on_invuln_timer_timeout():
 	#todo invuln effect

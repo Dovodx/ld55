@@ -85,8 +85,8 @@ func _on_attack_timer_timeout():
 	anim.play("charge")
 	anim.queue("fire")
 
-func _on_animation_player_current_animation_changed(name):
-	if name == "fire":
+func _on_animation_player_current_animation_changed(animName):
+	if animName == "fire":
 		if target != null:
 			hitbox.rotation = (target.global_position - hitbox.global_position).angle()
 		else:
@@ -113,7 +113,7 @@ func find_new_target():
 	var lowestDistance = 999999999999
 	var newTarget: Node2D
 	for enemy in get_node("/root/level/enemies").get_children():
-		if enemy.dead:
+		if enemy.dead or !enemy.get_node("sprite root").visible:
 			continue
 		#try it out - target enemy closest to player, might be OP
 		var distance = player.global_position.distance_squared_to(enemy.global_position)
