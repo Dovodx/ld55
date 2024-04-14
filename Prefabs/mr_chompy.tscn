@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c20jxxewgy7e"]
+[gd_scene load_steps=12 format=3 uid="uid://c20jxxewgy7e"]
 
 [ext_resource type="Texture2D" uid="uid://dkde3iqdjiop0" path="res://Sprites/Mr. Chompy/stand 1.png" id="1_kmxrd"]
 [ext_resource type="Script" path="res://Scripts/MrChompyScript.gd" id="1_p7kgx"]
 [ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Mr. Chompy/stand 2.png" id="2_qs0l8"]
 [ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Mr. Chompy/stand 3.png" id="3_c21a8"]
 [ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Mr. Chompy/stand 4.png" id="4_huumj"]
+[ext_resource type="AudioStream" uid="uid://dqtx8nlafrxs7" path="res://Sounds/explode 4.wav" id="6_josgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48aqh"]
 size = Vector2(56, 39)
@@ -88,6 +89,12 @@ libraries = {
 "": SubResource("AnimationLibrary_e5ejq")
 }
 autoplay = "moving"
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_josgl")
+volume_db = -7.0
+max_polyphony = 3
+bus = &"SFX"
 
 [connection signal="timeout" from="move timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="attack cooldown" to="." method="_on_attack_cooldown_timeout"]

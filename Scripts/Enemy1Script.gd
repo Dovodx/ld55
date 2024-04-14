@@ -4,7 +4,7 @@ var maxHealth = 1.0
 var health = maxHealth
 var dead = false
 
-const SPEED = 500.0
+const SPEED = 480.0
 var damage = 10
 var angleVariationDeg = 30
 var moveTimer: Timer

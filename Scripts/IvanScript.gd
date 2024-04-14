@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed = 350.0
 var currentSpeed = speed
-var damage = 10.0
+var damage = 15.0
 
 var sprite: Sprite2D
 var spriteRoot: Node2D
@@ -37,13 +37,15 @@ func _ready():
 	cooldownTimer = get_node("attack cooldown")
 	anim = get_node("AnimationPlayer")
 	
-	hitbox.area_entered.connect(player._hit_enemy.bind(damage))
 	hitbox.area_entered.connect(_on_enemy_hit)
 	anim.play("float")
 
 func _on_enemy_hit(area):
 	#todo allow for multiple hits probably
 	if area.get_parent().get_parent().name == "enemies":
+		area.get_parent().take_damage(damage)
+		get_node("hit").play()
+		
 		hitbox.set_deferred("monitoring", false)
 		hitbox.set_deferred("monitorable", false)
 
@@ -65,13 +67,12 @@ func _physics_process(delta):
 	lastPhysTime = Time.get_ticks_usec()
 
 func _on_move_timer_timeout():
-	#Move towards player to slightly improve shot positioning
+	#Move towards player
 	var moveDir = global_position.direction_to(player.global_position).rotated(deg_to_rad(randi_range(-35, 35)))
 	velocity = moveDir * speed
 	anim.play("float")
 
 func _on_attack_timer_timeout():
-	#angle and fire laser
 	if target == null or target == player:
 		find_new_target()
 	if target == null or target == player:
@@ -80,7 +81,7 @@ func _on_attack_timer_timeout():
 	currentSpeed = 0
 	moveTimer.stop()
 	velocity = Vector2.ZERO
-	#todo wait until charged, handle cases where target disappears before firing
+	
 	savedTargetPos = target.global_position
 	anim.play("charge")
 	anim.queue("fire")
@@ -92,6 +93,7 @@ func _on_animation_player_current_animation_changed(animName):
 		else:
 			hitbox.rotation = (savedTargetPos - hitbox.global_position).angle()
 		#todo sound
+		#todo set activeness in anim instead of here?
 		hitbox.set_deferred("monitoring", true)
 		hitbox.set_deferred("monitorable", true)
 		hitbox.visible = true

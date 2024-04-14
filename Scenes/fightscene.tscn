@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=40 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
@@ -7,13 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://c20jxxewgy7e" path="res://Prefabs/mr_chompy.tscn" id="3_78ko7"]
 [ext_resource type="PackedScene" uid="uid://cqs7ri0amr2c6" path="res://Prefabs/ivan.tscn" id="4_1q6ac"]
 [ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
-[ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Mr. Chompy/effect.png" id="4_vdgsq"]
 [ext_resource type="PackedScene" uid="uid://25q8hox5ks6" path="res://Prefabs/gorg.tscn" id="5_5f8gp"]
 [ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Mr. Chompy/stand 2.png" id="5_o1ioh"]
 [ext_resource type="Texture2D" uid="uid://nvb0ed5yc8n2" path="res://Sprites/Player/run 1.png" id="5_tmu08"]
 [ext_resource type="Texture2D" uid="uid://bmwhw1krgdgfr" path="res://Sprites/Player/run 3.png" id="6_7th03"]
 [ext_resource type="PackedScene" uid="uid://dicw2htxld5ih" path="res://Prefabs/simon.tscn" id="6_gq35v"]
 [ext_resource type="Texture2D" uid="uid://dkde3iqdjiop0" path="res://Sprites/Mr. Chompy/stand 1.png" id="7_hd0vu"]
+[ext_resource type="PackedScene" uid="uid://i31obgh6na2r" path="res://Prefabs/smog.tscn" id="7_ulpec"]
+[ext_resource type="PackedScene" uid="uid://bddky3d76d478" path="res://Prefabs/summon_effect.tscn" id="8_erhen"]
 [ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Mr. Chompy/stand 3.png" id="9_quxqn"]
 [ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Mr. Chompy/stand 4.png" id="10_vdxjk"]
 [ext_resource type="AudioStream" uid="uid://b0b1w3fuw2crd" path="res://Sounds/powerup 2.wav" id="11_thdfb"]
@@ -117,30 +118,6 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("sprite root/summon effect:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("sprite root/summon effect:self_modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_wdego"]
 resource_name = "hurt"
@@ -178,7 +155,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite root/summon effect:visible")
+tracks/1/path = NodePath("sprite root/summon sprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -190,7 +167,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite root/summon sprite:visible")
+tracks/2/path = NodePath("hitbox:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -202,7 +179,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("hitbox:monitoring")
+tracks/3/path = NodePath("hitbox:monitorable")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -214,22 +191,10 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("hitbox:monitorable")
+tracks/4/path = NodePath("sprite root/sprite:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite root/sprite:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -300,18 +265,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("sprite root/summon effect:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_o20gr"]
@@ -393,30 +346,6 @@ tracks/5/keys = {
 "args": [0.0],
 "method": &"play"
 }]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("sprite root/summon effect:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("sprite root/summon effect:self_modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.35, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.509804), Color(1, 1, 1, 0.509804), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_cnmae"]
@@ -537,22 +466,20 @@ position = Vector2(480, 270)
 
 [node name="player" type="CharacterBody2D" parent="."]
 visibility_layer = 2
+z_index = 2
 position = Vector2(480, 270)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_pqfpr")
-summons = Array[PackedScene]([ExtResource("3_78ko7"), ExtResource("4_1q6ac"), ExtResource("5_5f8gp"), ExtResource("6_gq35v"), null])
+summons = Array[PackedScene]([ExtResource("3_78ko7"), ExtResource("4_1q6ac"), ExtResource("5_5f8gp"), ExtResource("6_gq35v"), ExtResource("7_ulpec")])
+summonEffect = ExtResource("8_erhen")
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
+wait_time = 0.7
 one_shot = true
 
 [node name="sprite root" type="Node2D" parent="player"]
-
-[node name="summon effect" type="Sprite2D" parent="player/sprite root"]
-visible = false
-position = Vector2(0, 4)
-texture = ExtResource("4_vdgsq")
 
 [node name="sprite" type="Sprite2D" parent="player/sprite root"]
 texture = ExtResource("2_jnw6a")
@@ -647,6 +574,7 @@ position = Vector2(928, 480)
 [node name="summons" type="Node2D" parent="."]
 
 [node name="enemies" type="Node2D" parent="."]
+z_index = 1
 
 [node name="spawner" type="Node2D" parent="."]
 script = ExtResource("18_125yl")

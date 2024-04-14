@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dicw2htxld5ih"]
+[gd_scene load_steps=15 format=3 uid="uid://dicw2htxld5ih"]
 
 [ext_resource type="Script" path="res://Scripts/SimonScript.gd" id="1_4c7ex"]
 [ext_resource type="Texture2D" uid="uid://bgepfgufxr7ie" path="res://Sprites/Simon/closed.png" id="2_d3pdg"]
 [ext_resource type="Texture2D" uid="uid://crwgndnh4tttu" path="res://Sprites/Simon/open.png" id="3_4a76b"]
 [ext_resource type="Texture2D" uid="uid://wx80prjprumv" path="res://Sprites/Simon/munch.png" id="4_2plui"]
+[ext_resource type="AudioStream" uid="uid://80bm43jtsaua" path="res://Sounds/jump.wav" id="5_tmsv0"]
+[ext_resource type="AudioStream" uid="uid://swg4v4mmondq" path="res://Sounds/munch.wav" id="6_81xxi"]
+[ext_resource type="AudioStream" uid="uid://c28r3pj7tr05i" path="res://Sounds/open mouth.wav" id="6_fikmt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_scf7s"]
 size = Vector2(60, 36)
@@ -89,6 +92,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -2.8), Vector2(0, -4), Vector2(0, -2.8), Vector2(0, 0)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hop")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_uqs2f"]
 resource_name = "munch"
@@ -121,6 +138,20 @@ tracks/1/keys = {
 "method": &"drain_health"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("munch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_odtr6"]
 resource_name = "bite"
@@ -136,6 +167,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_4a76b")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("open")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_62qj0"]
@@ -171,6 +216,15 @@ shape = SubResource("RectangleShape2D_scf7s")
 [node name="sprite" type="Sprite2D" parent="sprite root"]
 texture = ExtResource("2_d3pdg")
 
+[node name="healthbar" type="ColorRect" parent="sprite root"]
+visible = false
+offset_left = -15.0
+offset_top = -26.0
+offset_right = 15.0
+offset_bottom = -24.0
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+
 [node name="hitbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
@@ -186,6 +240,21 @@ shape = SubResource("RectangleShape2D_qok8y")
 libraries = {
 "": SubResource("AnimationLibrary_62qj0")
 }
+
+[node name="hop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_tmsv0")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="open" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fikmt")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="munch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_81xxi")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="timeout" from="lunge timer" to="." method="_on_lunge_timer_timeout"]
 [connection signal="timeout" from="bite timer" to="." method="_on_bite_timer_timeout"]

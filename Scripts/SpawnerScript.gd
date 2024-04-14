@@ -39,7 +39,9 @@ func enemy_dead():
 func next_level():
 	levelNum += 1
 	player.next_level()
-	#todo more interesting waves, enemy variety
+	#todo: possibly slow down waves at high numbers, make something special happen at 20 crystals collected?
+	#typical highest level for me is about 32, adjust
+	print("level " + str(levelNum))
 	for i in levelNum:
 		call_deferred("spawn_enemy")
 

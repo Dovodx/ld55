@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var moveSpeed = 300.0
+var moveSpeed = 200.0
 var lungeSpeed = 600.0
 var damage = 0.5
 
@@ -12,9 +12,9 @@ var lastPhysTime = Time.get_ticks_usec()
 var hitbox: Area2D
 var target: Node2D = null
 
-var capturedEnemy: Node2D = null
-var capturedMaxHealth = 10.0 #placeholder numbers - these are set to the enemy victim's health
-var capturedHealth = 10.0
+var capturedMaxHealth = 0.0 #placeholder numbers - these are set to the enemy victim's health
+var capturedHealth = 0.0
+var healthbar: ColorRect
 
 var player: Node2D
 var biteTimer: Timer
@@ -32,45 +32,46 @@ func _ready():
 	lungeTimer = get_node("lunge timer")
 	anim = get_node("AnimationPlayer")
 	hitbox = get_node("hitbox")
+	healthbar = get_node("sprite root/healthbar")
 	player = get_node("/root/level/player")
-	hitbox.area_entered.connect(player._hit_enemy.bind(damage))
 	hitbox.area_entered.connect(_on_enemy_hit)
 	
 	#hitbox only active during "open" animation, when he lunges at an enemy to eat them
 	hitbox.set_deferred("monitoring", false)
 	hitbox.set_deferred("monitorable", false)
+	healthbar.visible = false
 	
 	anim.play("move")
 
 func _on_enemy_hit(area):
-	#todo grab and hold enemy, not sure if enemy should be considered dead or have a limit to how much hp can be sapped
-	#heal player while munching on enemy
-	if capturedEnemy == null:
+	if capturedMaxHealth == 0:
 		biteTimer.stop()
 		hitbox.set_deferred("monitoring", false)
 		hitbox.set_deferred("monitorable", false)
-		capturedEnemy = area.get_parent()
-		capturedEnemy.get_node("sprite root/sprite").visible = false
-		capturedEnemy.get_node("hitbox").set_deferred("monitoring", false)
-		capturedEnemy.get_node("hitbox").set_deferred("monitorable", false)
-		capturedEnemy.get_node("hurtbox").set_deferred("monitoring", false)
-		capturedEnemy.get_node("hurtbox").set_deferred("monitorable", false)
-		capturedEnemy.stun(stunTime)
-		capturedEnemy.velocity = Vector2.ZERO
+		var capturedEnemy = area.get_parent()
+		capturedMaxHealth = capturedEnemy.maxHealth
+		capturedHealth = capturedEnemy.health
+		capturedEnemy.die()
+		healthbar.size.x = 30.0 * capturedHealth / capturedMaxHealth
+		healthbar.visible = true
 		velocity = Vector2.ZERO
 		anim.play("munch")
 
 func drain_health():
-	if capturedEnemy == null or capturedEnemy.dead or capturedEnemy.health <= 0:
+	#Heal player while munching on enemy
+	if capturedHealth <= 0:
 		anim.play("move")
-		capturedEnemy = null
+		healthbar.visible = false
+		capturedMaxHealth = 0
+		capturedHealth = 0
 		find_new_target()
 		lungeTimer.start()
 		var moveDir = global_position.direction_to(target.global_position).rotated(deg_to_rad(randi_range(-80, 80)))
 		velocity = moveDir * moveSpeed
 	else:
-		capturedEnemy.take_damage(damage)
+		capturedHealth -= damage
 		player.heal(damage)
+		healthbar.size.x = 30.0 * capturedHealth / capturedMaxHealth
 		
 func _on_bite_timer_timeout():
 	hitbox.set_deferred("monitoring", false)
@@ -99,7 +100,7 @@ func _on_lunge_timer_timeout():
 	if target == null or target == player:
 		find_new_target()
 	var attackDir = Vector2.RIGHT
-	if target != null:
+	if target != null and target != player:
 		attackDir = global_position.direction_to(target.global_position)
 		velocity = attackDir * lungeSpeed
 		anim.play("open")

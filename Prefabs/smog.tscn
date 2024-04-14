@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://i31obgh6na2r"]
+
+[ext_resource type="Script" path="res://Scripts/SmogScript.gd" id="1_run73"]
+[ext_resource type="Texture2D" uid="uid://cduq71cwle3ol" path="res://Sprites/Smog/smoke.png" id="2_h6knt"]
+[ext_resource type="Texture2D" uid="uid://0wp1krvrl8ar" path="res://Sprites/Smog/eyes.png" id="2_lapir"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8ty2"]
+size = Vector2(70, 70)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlapd"]
+radius = 130.0
+
+[sub_resource type="Curve" id="Curve_i0a1m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.248963, 1), 0.0, 0.0, 0, 0, Vector2(0.502075, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_bxkmx"]
+curve = SubResource("Curve_i0a1m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_btw37"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 70.0
+emission_ring_inner_radius = 55.0
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_bxkmx")
+
+[node name="Smog" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_run73")
+
+[node name="move timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.5
+autostart = true
+
+[node name="slow timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.2
+autostart = true
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_d8ty2")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="collider" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_vlapd")
+
+[node name="sprite root" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="sprite root"]
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_btw37")
+texture = ExtResource("2_h6knt")
+lifetime = 3.0
+local_coords = true
+
+[node name="sprite" type="Sprite2D" parent="sprite root"]
+texture = ExtResource("2_lapir")
+
+[connection signal="timeout" from="move timer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="slow timer" to="." method="_on_slow_timer_timeout"]

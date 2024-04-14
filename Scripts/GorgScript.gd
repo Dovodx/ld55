@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed = 500.0
 var hitSpeedThreshold = 0.5
-var damage = 1.0
+var damage = 2.0
 var stunTime = 0.5
 var pushForce = 250.0
 
@@ -23,17 +23,15 @@ func _ready():
 	
 	hitbox = get_node("hitbox")
 	player = get_node("/root/level/player")
-	hitbox.area_entered.connect(player._hit_enemy.bind(damage))
 	hitbox.area_entered.connect(_on_enemy_hit)
 
 func _on_enemy_hit(area):
 	#todo probably okay to hit multiple enemies in one charge?
 	#todo push enemy out of the way
 	if area.get_parent().get_parent().name == "enemies":
-		#hitbox.set_deferred("monitoring", false)
-		#hitbox.set_deferred("monitorable", false)
+		area.get_parent().take_damage(damage)
+		get_node("hit").play()
 		
-		#todo probably have to stop enemy's movement timer to "stun" them
 		area.get_parent().stun(stunTime)
 		var awayFromPlayer = player.global_position.direction_to(area.get_parent().global_position)
 		area.get_parent().velocity = awayFromPlayer * pushForce
@@ -50,7 +48,7 @@ func _process(delta):
 	)
 
 func _physics_process(delta):
-	velocity *= 0.96
+	velocity *= 0.985
 	sprite.flip_h = velocity.x < 0
 	
 	if velocity.length() < speed * hitSpeedThreshold:
@@ -73,23 +71,26 @@ func _physics_process(delta):
 	lastPhysTime = Time.get_ticks_usec()
 
 func _on_move_timer_timeout():
-	if target == null or target == player:
-		find_new_target()
+	#if target == null or target == player:
+		#find_new_target()
 	var attackDir = Vector2.RIGHT
-	if target != null:
-		attackDir = global_position.direction_to(target.global_position)
-	else:
-		attackDir = global_position.direction_to(target.global_position).rotated(deg_to_rad(randi_range(-35, 35)))
+	#if target != null:
+		#attackDir = global_position.direction_to(target.global_position)
+	#else:#??????????
+		#attackDir = global_position.direction_to(target.global_position).rotated(deg_to_rad(randi_range(-35, 35)))
+	#Always move towards the player for maximum effectiveness
+	attackDir = global_position.direction_to(player.global_position)
 	var fixedAngle = roundi(rad_to_deg(attackDir.angle()) / 90.0) * 90
 	attackDir = attackDir.rotated(-attackDir.angle() + deg_to_rad(fixedAngle))
 	velocity = attackDir * speed
+	get_node("slide").play()
 
 func find_new_target():
 	#search for the nearest enemy, EAT
 	var lowestDistance = 999999999999
 	var newTarget: Node2D
 	for enemy in get_node("/root/level/enemies").get_children():
-		if enemy.dead or !enemy.get_node("sprite root").visible:
+		if enemy.dead or !enemy.get_node("sprite_root").visible:
 			continue
 		var distance = global_position.distance_squared_to(enemy.global_position)
 		if distance < lowestDistance:

@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 var currentSpeed = SPEED
 @export var summons: Array[PackedScene]
+@export var summonEffect: PackedScene
 
 var maxHealth = 100.0
 var health = 100.0
@@ -192,6 +193,11 @@ func summon(monsterNum):
 	summonToSpawn.global_position = global_position
 	get_tree().get_root().get_node("level/summons").add_child(summonToSpawn)
 	close_summon_menu()
+	
+	var effect = summonEffect.instantiate()
+	effect.global_position = global_position
+	get_tree().get_root().get_node("level/summons").add_child(effect)
+	get_node("sounds/summon").play()
 
 func heal(amount):
 	if dead: return
