@@ -27,6 +27,9 @@ top down summoning survival:
     -die
     -enemy voice or something
     -all enemies clear/level up
+
+-------HANDLE PLAYER DEATH STUPID
+
 -background
 ✔randomize crystal locations/fix crystal and enemy spawning
 ✔autonomous summon separate from player

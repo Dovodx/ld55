@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Mr. Chompy/stand 4.png" id="4_huumj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48aqh"]
-size = Vector2(56, 39)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvhmk"]
 size = Vector2(58, 41)
@@ -53,6 +53,7 @@ _data = {
 
 [node name="Mr Chompy" type="CharacterBody2D"]
 collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_p7kgx")
 
 [node name="move timer" type="Timer" parent="."]
@@ -65,7 +66,7 @@ process_callback = 0
 wait_time = 0.5
 one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="collider" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(-1, 3.5)
 shape = SubResource("RectangleShape2D_48aqh")

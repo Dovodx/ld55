@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=33 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
 [ext_resource type="Texture2D" uid="uid://duiwftba68fb5" path="res://Sprites/Player/stand 1.png" id="2_jnw6a"]
 [ext_resource type="Texture2D" uid="uid://c2slcior2nwi2" path="res://Sprites/Player/stand 2.png" id="3_4n220"]
 [ext_resource type="PackedScene" uid="uid://c20jxxewgy7e" path="res://Prefabs/mr_chompy.tscn" id="3_78ko7"]
+[ext_resource type="PackedScene" uid="uid://cqs7ri0amr2c6" path="res://Prefabs/ivan.tscn" id="4_1q6ac"]
 [ext_resource type="Texture2D" uid="uid://bkywn5lh4e7cr" path="res://Sprites/Player/stand 3.png" id="4_e1gtx"]
 [ext_resource type="Texture2D" uid="uid://bg2vvprx8naqo" path="res://Sprites/Mr. Chompy/effect.png" id="4_vdgsq"]
 [ext_resource type="Texture2D" uid="uid://dwfmxb16r0qwa" path="res://Sprites/Mr. Chompy/stand 2.png" id="5_o1ioh"]
@@ -517,7 +518,7 @@ position = Vector2(480, 270)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_pqfpr")
-summons = Array[PackedScene]([ExtResource("3_78ko7"), null, null, null, null])
+summons = Array[PackedScene]([ExtResource("3_78ko7"), ExtResource("4_1q6ac"), null, null, null])
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
