@@ -71,7 +71,7 @@ func _ready():
 	hud.get_node("dead/quit").connect("pressed", _on_quit_pressed)
 	
 	for button in hud.get_node("summon select").get_children():
-		if button.name == "bg":
+		if button.name == "bg" or button.get_index() > 5:
 			continue
 		button.connect("pressed", summon.bind(button.get_index() - 1))
 

@@ -44,9 +44,6 @@ func _on_enemy_hit(area):
 	#todo allow for multiple hits probably
 	if area.get_parent().get_parent().name == "enemies":
 		area.get_parent().take_damage(damage)
-		
-		hitbox.set_deferred("monitoring", false)
-		hitbox.set_deferred("monitorable", false)
 
 func _process(delta):
 	var timeDiff = (Time.get_ticks_usec() - lastPhysTime) / 1000000.0
@@ -91,16 +88,14 @@ func _on_animation_player_current_animation_changed(animName):
 			hitbox.rotation = (target.global_position - hitbox.global_position).angle()
 		else:
 			hitbox.rotation = (savedTargetPos - hitbox.global_position).angle()
-		#todo sound
-		#todo set activeness in anim instead of here?
-		hitbox.set_deferred("monitoring", true)
-		hitbox.set_deferred("monitorable", true)
+		#Set to active in animation
 		hitbox.visible = true
 		fireTimer.start()
 
 func _on_fire_timer_timeout():
 	cooldownTimer.start()
 	hitbox.visible = false
+	#Anim also sets active, this is a "double check" (dead code)
 	hitbox.set_deferred("monitoring", false)
 	hitbox.set_deferred("monitorable", false)
 

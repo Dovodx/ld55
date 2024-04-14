@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqs7ri0amr2c6"]
+[gd_scene load_steps=16 format=3 uid="uid://cqs7ri0amr2c6"]
 
 [ext_resource type="Script" path="res://Scripts/IvanScript.gd" id="1_6h3k6"]
 [ext_resource type="Texture2D" uid="uid://d1hws0muiegxq" path="res://Sprites/Ivan/float.png" id="2_08gj8"]
 [ext_resource type="Texture2D" uid="uid://cnw7lfpradhgl" path="res://Sprites/Ivan/charge.png" id="2_48cty"]
 [ext_resource type="Texture2D" uid="uid://bnlp6gt5r1htg" path="res://Sprites/Ivan/laser.png" id="3_03dt5"]
+[ext_resource type="Texture2D" uid="uid://up183p7maue8" path="res://Sprites/Ivan/laser base.png" id="3_js0yb"]
 [ext_resource type="Texture2D" uid="uid://dmjhet3vba8pl" path="res://Sprites/Ivan/fire.png" id="3_oah6x"]
 [ext_resource type="AudioStream" uid="uid://twggefqaagdp" path="res://Sounds/ivan charge.wav" id="7_hwmfp"]
 [ext_resource type="AudioStream" uid="uid://by54vur7ikfvk" path="res://Sounds/laser 3.wav" id="7_v5jkm"]
@@ -50,6 +51,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [ExtResource("2_08gj8")]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hitbox:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hitbox:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("hitbox:monitoring")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_pcfb3"]
 resource_name = "charge"
@@ -82,6 +119,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_4lfvc"]
 resource_name = "fire"
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -107,6 +145,42 @@ tracks/1/keys = {
 "args": [0.0],
 "method": &"play"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hitbox:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hitbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hitbox:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_3uomy"]
@@ -202,6 +276,10 @@ position = Vector2(1024, 0)
 rotation = 1.5708
 scale = Vector2(1, 32)
 shape = SubResource("RectangleShape2D_mvhmk")
+
+[node name="laser base" type="Sprite2D" parent="hitbox"]
+rotation = 1.5708
+texture = ExtResource("3_js0yb")
 
 [node name="sprite" type="Sprite2D" parent="hitbox"]
 position = Vector2(1024, 0)

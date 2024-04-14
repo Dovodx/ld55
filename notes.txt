@@ -11,7 +11,7 @@ top down summoning survival:
     ✔hurt
     Xdead
     ✔summon effect
--song
+✔song
 ✔interpolation
     ✔player character
     ✔enemy
@@ -41,14 +41,11 @@ top down summoning survival:
     ✔rework chompy to live on his own: chomp around being a good attack monster
     ✔Ivan: eyeball that shoots a laser that goes fullscreen (weakness: either limited damage or crowd control)
         ✔just need that extra dmg, parameterize dealing damage to enemies, give them health
-        -make laser more active FUCK IT (and still have it fade out)
-        -make base of laser so that it's not "clipping" where it starts
     ✔Gorg: charges straight into enemies, knocking them around if they don't die
         ✔push mechanic
     ✔Simon: grabs one enemy at a time, draining their life and giving it to you (weakness, doesn't kill efficiently, heals slowly)
         ✔deal 0.25dmg every 0.5s/1s?, send health to player
         ✔grab enemy and hold them in place while sapping
-        -heal effect on player
     ✔Smog: a cloud of smoke that slows down enemies within, making them easier to avoid and hit
     -stretch goal: ultimate summon that sacrifices your other ones or requires each to be summoned at least once
 ✔more enemies
@@ -56,18 +53,19 @@ top down summoning survival:
     ✔big slow guy with more health
     ✔show enemy healthbars
 
--controls guide
-
 ✔require more crystals to summon once you have a few so that you can't spam as much
 ✔show num crystals in hud
 ✔spawn more enemies and tougher enemies so that summons don't instantly overrun the game lmao
 ✔make sure player always draws on top
 ✔crystals draw on top
 ✔Smog draws on bottom
--dodge button?
 
 ✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
--fix menu button sizing
 ✔concept going forward: enemy waves come with time, new waves do not wait for you to finish the previous ones
--possibly use space to summon at will rather than requiring the player to summon immediately when grabbing a crystal (might not be needed with pushback effect?)
+
+-fix menu button sizing
 -maybe different font that better matches occult-ish theme?
+-heal effect on player
+-how to play?
+✔make laser fade with activeness to match
+✔make base of laser so that it's not "clipping" where it starts

@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=42 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
+[ext_resource type="AudioStream" uid="uid://cmpskq5a26x4l" path="res://Music/combat.wav" id="2_1igfj"]
 [ext_resource type="Texture2D" uid="uid://duiwftba68fb5" path="res://Sprites/Player/stand 1.png" id="2_jnw6a"]
 [ext_resource type="Texture2D" uid="uid://c2slcior2nwi2" path="res://Sprites/Player/stand 2.png" id="3_4n220"]
 [ext_resource type="PackedScene" uid="uid://c20jxxewgy7e" path="res://Prefabs/mr_chompy.tscn" id="3_78ko7"]
@@ -122,7 +123,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_wdego"]
 resource_name = "hurt"
-length = 0.7
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -462,6 +463,12 @@ size = Vector2(20, 1000)
 
 [node name="HUD" parent="." instance=ExtResource("1_ty0b0")]
 
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("2_1igfj")
+autoplay = true
+bus = &"Music"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 270)
 
@@ -477,7 +484,7 @@ summonEffect = ExtResource("8_erhen")
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
-wait_time = 0.7
+wait_time = 0.5
 one_shot = true
 
 [node name="sprite root" type="Node2D" parent="player"]
@@ -511,6 +518,7 @@ shape = SubResource("RectangleShape2D_tmdai")
 [node name="sounds" type="Node2D" parent="player"]
 
 [node name="pickup" type="AudioStreamPlayer2D" parent="player/sounds"]
+process_mode = 3
 stream = ExtResource("11_thdfb")
 bus = &"SFX"
 
