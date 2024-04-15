@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbw5387u3xunb"]
+
+[ext_resource type="Texture2D" uid="uid://n7ljjxqfdhbh" path="res://Sprites/Simon/heal effect.png" id="1_66px3"]
+[ext_resource type="Script" path="res://Scripts/PlayParticleScript.gd" id="2_evybn"]
+
+[sub_resource type="Curve" id="Curve_kc2wn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.253112, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aauva"]
+curve = SubResource("Curve_kc2wn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mj5l5"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 16.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+color = Color(0, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_aauva")
+
+[node name="heal particle" type="GPUParticles2D"]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_mj5l5")
+texture = ExtResource("1_66px3")
+one_shot = true
+local_coords = true
+script = ExtResource("2_evybn")

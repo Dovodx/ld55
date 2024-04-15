@@ -443,7 +443,6 @@ texture = ExtResource("8_7jclf")
 
 [node name="dead" type="Control" parent="."]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -459,15 +458,111 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -121.0
-offset_right = 100.0
-offset_bottom = -81.0
+offset_left = -150.0
+offset_top = -262.0
+offset_right = 150.0
+offset_bottom = -199.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
-text = "[center]You Died"
+text = "[center]Game Over"
+
+[node name="stat titles" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -464.0
+offset_top = -208.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[right]Enemies Slain:
+Crystals Collected:
+Total Healing:"
+
+[node name="stats" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -208.0
+offset_right = 469.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[left]0
+0
+0"
+
+[node name="stat subtitle" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.5
+offset_top = -94.0
+offset_right = 205.5
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Summon Counts:"
+
+[node name="stat titles2" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -464.0
+offset_top = -60.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[right]Mr. Chompy:
+Ivan:
+Gorg:
+Simon:
+Smog"
+scroll_active = false
+
+[node name="summon stats" type="RichTextLabel" parent="dead"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -60.0
+offset_right = 469.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[left]0
+0
+0
+0
+0"
 
 [node name="retry" type="Button" parent="dead"]
 layout_mode = 1
@@ -476,15 +571,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -53.0
-offset_right = 70.0
-offset_bottom = -19.0
+offset_left = -360.0
+offset_top = 148.0
+offset_right = -120.0
+offset_bottom = 198.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(70, 15)
 theme = ExtResource("2_8a2yb")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Retry"
 
 [node name="quit" type="Button" parent="dead"]
@@ -494,15 +589,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = 7.0
-offset_right = 70.0
-offset_bottom = 41.0
+offset_left = 119.0
+offset_top = 148.0
+offset_right = 359.0
+offset_bottom = 198.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(70, 15)
 theme = ExtResource("2_8a2yb")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Quit"
 
 [node name="pause menu" type="Control" parent="."]

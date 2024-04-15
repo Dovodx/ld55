@@ -63,9 +63,10 @@ top down summoning survival:
 ✔do something about enemy1 getting stuck in corner - bigger play area feels better, working from there
 ✔concept going forward: enemy waves come with time, new waves do not wait for you to finish the previous ones
 
--fix menu button sizing
--maybe different font that better matches occult-ish theme?
--heal effect on player
--how to play?
+✔fix menu button sizing
+Xmaybe different font that better matches occult-ish theme?
+-spawn more crystals at higher levels
+✔show post-game stats & score
+✔heal effect on player
 ✔make laser fade with activeness to match
 ✔make base of laser so that it's not "clipping" where it starts

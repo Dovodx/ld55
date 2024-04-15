@@ -22,6 +22,7 @@ var summonSprite: Sprite2D
 var lastPhysTime = Time.get_ticks_usec()
 
 var anim: AnimationPlayer
+@export var particles: PackedScene
 
 var hud: CanvasLayer
 var healthBar: ColorRect
@@ -33,6 +34,7 @@ var optionsMenu: Control
 signal hit_enemy(area, dmg)
 
 func _ready():
+	Global.reset_stats()
 	dead = false
 	get_node("body collider").disabled = false
 	currentSpeed = SPEED
@@ -156,6 +158,8 @@ func get_crystal(crystal):
 	crystal.set_deferred("monitoring", false)
 	crystal.set_deferred("monitorable", false)
 	crystalsCollected += 1
+	Global.crystalsCollected += 1
+	
 	get_node("sounds/pickup").play()
 	if !summonActive and crystalsCollected >= crystalsNeeded:
 		show_summon_menu()
@@ -175,7 +179,7 @@ func show_summon_menu():
 	get_tree().paused = true
 	hud.get_node("pause bg").visible = true
 	hud.get_node("summon select").visible = true
-	
+	#RIP rideable Mr. Chompy
 	#summonActive = true
 	#invulnTimer.stop()
 	#invulnerable = true
@@ -188,11 +192,11 @@ func close_summon_menu():
 	hud.get_node("summon select").visible = false
 
 func summon(monsterNum):
-	#todo restore summon effect, push enemies away
 	var summonToSpawn = summons[monsterNum].instantiate()
 	summonToSpawn.global_position = global_position
 	get_tree().get_root().get_node("level/summons").add_child(summonToSpawn)
 	close_summon_menu()
+	Global.summonCounts[monsterNum] += 1
 	
 	var effect = summonEffect.instantiate()
 	effect.global_position = global_position
@@ -201,7 +205,13 @@ func summon(monsterNum):
 
 func heal(amount):
 	if dead: return
+	var healthBefore = health
 	health = clamp(health + amount, 0, maxHealth)
+	Global.totalHealing += health - healthBefore
+	#Spawn particle effect
+	var emitterToSpawn = particles.instantiate()
+	get_tree().get_root().get_node("level/player/sprite root").add_child(emitterToSpawn)
+	emitterToSpawn.position = Vector2.ZERO
 	update_healthbar()
 
 func _take_damage(body, dmg):
@@ -216,16 +226,24 @@ func _take_damage(body, dmg):
 	if health <= 0:
 		dead = true
 		visible = false
+		get_node("/root/level/music").stop()
+		get_node("/root/level/spawner").stop_spawning()
 		get_node("body collider").set_deferred("disabled", true)
 		pauseBg.visible = true
+		hud.get_node("dead/stats").text = "[left]" + str(Global.enemiesSlain) + "\n" + str(Global.crystalsCollected) + "\n" + str(Global.totalHealing)
+		
+		var summonCountText = "[left]"
+		for i in 5:
+			summonCountText += str(Global.summonCounts[i])
+			if i < 4:
+				summonCountText += "\n"
+		hud.get_node("dead/summon stats").text = summonCountText
 		hud.get_node("dead").visible = true
-	#todo death anim or effect?
 
 func update_healthbar():
 	healthBar.size.x = max((health as float / maxHealth) * 360.0, 0)
 
 func _on_invuln_timer_timeout():
-	#todo invuln effect
 	invulnerable = false
 
 func _hit_enemy(area, dmg):

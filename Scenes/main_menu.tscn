@@ -29,15 +29,15 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -209.0
-offset_top = 16.0
+offset_top = 39.0
 offset_right = 190.999
-offset_bottom = 98.0
+offset_bottom = 121.0
 grow_horizontal = 2
 pivot_offset = Vector2(200, 41)
 theme = ExtResource("1_ma1bl")
-theme_override_font_sizes/normal_font_size = 41
+theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "[center]Game Title[/center]"
+text = "[center]Tiny Summoner[/center]"
 scroll_active = false
 
 [node name="start" type="Button" parent="."]
@@ -47,15 +47,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -34.0
-offset_right = 70.0
-offset_bottom = -4.0
+offset_left = -140.0
+offset_top = -124.0
+offset_right = 140.0
+offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(70, 15)
 theme = ExtResource("1_ma1bl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 40
 text = "Start"
 
 [node name="options" type="Button" parent="."]
@@ -65,15 +65,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = 24.0
-offset_right = 70.0
-offset_bottom = 58.0
+offset_left = -140.0
+offset_top = -34.0
+offset_right = 140.0
+offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(70, 15)
 theme = ExtResource("1_ma1bl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 40
 text = "Options"
 
 [node name="quit" type="Button" parent="."]
@@ -83,15 +83,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = 84.0
-offset_right = 70.0
-offset_bottom = 118.0
+offset_left = -140.0
+offset_top = 56.0
+offset_right = 140.0
+offset_bottom = 124.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(70, 15)
 theme = ExtResource("1_ma1bl")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 40
 text = "Quit"
 
 [node name="options_bg" type="ColorRect" parent="."]

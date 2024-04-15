@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ca5avjtsn6egc"]
+[gd_scene load_steps=43 format=3 uid="uid://ca5avjtsn6egc"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScript.gd" id="1_pqfpr"]
 [ext_resource type="PackedScene" uid="uid://bo153vm1kdfnp" path="res://Prefabs/hud.tscn" id="1_ty0b0"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://i31obgh6na2r" path="res://Prefabs/smog.tscn" id="7_ulpec"]
 [ext_resource type="PackedScene" uid="uid://bddky3d76d478" path="res://Prefabs/summon_effect.tscn" id="8_erhen"]
 [ext_resource type="Texture2D" uid="uid://cy1jyce3nueix" path="res://Sprites/Mr. Chompy/stand 3.png" id="9_quxqn"]
+[ext_resource type="PackedScene" uid="uid://cbw5387u3xunb" path="res://Prefabs/heal_particle.tscn" id="10_edkho"]
 [ext_resource type="Texture2D" uid="uid://bg4us3kuntlki" path="res://Sprites/Mr. Chompy/stand 4.png" id="10_vdxjk"]
 [ext_resource type="AudioStream" uid="uid://b0b1w3fuw2crd" path="res://Sounds/powerup 2.wav" id="11_thdfb"]
 [ext_resource type="AudioStream" uid="uid://bqbwcbe6b73dd" path="res://Sounds/hurt.wav" id="12_h16eb"]
@@ -481,6 +482,7 @@ motion_mode = 1
 script = ExtResource("1_pqfpr")
 summons = Array[PackedScene]([ExtResource("3_78ko7"), ExtResource("4_1q6ac"), ExtResource("5_5f8gp"), ExtResource("6_gq35v"), ExtResource("7_ulpec")])
 summonEffect = ExtResource("8_erhen")
+particles = ExtResource("10_edkho")
 
 [node name="invuln timer" type="Timer" parent="player"]
 process_callback = 0
@@ -569,16 +571,16 @@ shape = SubResource("RectangleShape2D_xcfbf")
 [node name="crystals" type="Node2D" parent="."]
 
 [node name="crystal" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(32, 32)
+position = Vector2(128, 128)
 
 [node name="crystal2" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(928, 32)
+position = Vector2(832, 128)
 
 [node name="crystal3" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(32, 480)
+position = Vector2(128, 384)
 
 [node name="crystal4" parent="crystals" instance=ExtResource("16_1oikx")]
-position = Vector2(928, 480)
+position = Vector2(832, 384)
 
 [node name="summons" type="Node2D" parent="."]
 

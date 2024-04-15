@@ -4,11 +4,11 @@ extends Node
 
 var levelNum = 0
 var enemyCount = 0
+
 #480x270
 var screenCenter = Vector2(480, 270)
 var boundsOffset = 50
 
-var timesBetweenLevels = [10, 10, 15, 15, 15, 15]
 var levelTimer: Timer
 
 var player: Node2D
@@ -18,7 +18,7 @@ func _ready():
 	levelTimer = get_node("next level timer")
 	enemyCount = 0
 	next_level()
-	levelTimer.wait_time = timesBetweenLevels[levelNum - 1]
+	levelTimer.wait_time = 10
 	levelTimer.start()
 	
 func spawn_enemy():
@@ -26,34 +26,35 @@ func spawn_enemy():
 	var highestEnemyNum = clamp(levelNum / 4, 0, enemies.size() - 1)
 	var enemyNum = randi_range(0, highestEnemyNum)
 	var enemyToSpawn = enemies[enemyNum].instantiate()
-	#todo ensure enemies spawn away from player and within level bounds
 	enemyToSpawn.global_position = get_point_away_from_player()
 	get_tree().get_root().get_node("level/enemies").add_child(enemyToSpawn)
 
 func enemy_dead():
-	#todo not sure if I'll need this, but an enemy cap isn't a bad idea
 	enemyCount -= 1
+	Global.enemiesSlain += 1
 	if enemyCount < 0:
 		print("ERROR: Enemy count below 0?")
 
 func next_level():
 	levelNum += 1
 	player.next_level()
-	#todo: possibly slow down waves at high numbers, make something special happen at 20 crystals collected?
-	#typical highest level for me is about 32, adjust
 	print("level " + str(levelNum))
 	for i in levelNum:
 		call_deferred("spawn_enemy")
 
+func stop_spawning():
+	levelTimer.stop()
+
 func respawn_crystals():
-	var num = 0
+	if get_node("/root/level/crystals").get_children().size() < 10 and (Global.crystalsCollected) / 30 > get_node("/root/level/crystals").get_children().size():
+		var newCrystal = get_node("/root/level/crystals").get_children()[0].duplicate()
+		get_node("/root/level/crystals").call_deferred("add_child", newCrystal)
+		
 	for crystal in get_node("/root/level/crystals").get_children():
-		#todo randomize positions away from player
 		crystal.visible = true
 		crystal.set_deferred("monitoring", true)
 		crystal.set_deferred("monitorable", true)
 		crystal.global_position = get_point_away_from_player()
-		num += 1
 
 func get_point_away_from_player():
 	var quadrant = Vector2.ONE
@@ -84,6 +85,5 @@ func get_point_away_from_player():
 
 func _on_next_level_timer_timeout():
 	next_level()
-	#levelTimer.wait_time = timesBetweenLevels[min(levelNum - 1, timesBetweenLevels.size() - 1)]
 	levelTimer.wait_time = 10
 	levelTimer.start()

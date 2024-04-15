@@ -53,7 +53,7 @@ func _process(delta):
 	)
 
 func _physics_process(delta):
-	velocity *= 0.92
+	velocity *= 0.96
 	sprite.flip_h = velocity.x < 0
 
 	move_and_slide()
