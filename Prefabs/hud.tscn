@@ -222,9 +222,9 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "Warlock's best friend.
-Charges at the nearest enemy, dealing [color=red]1 damage[/color] every [color=blue]0.5 seconds[/color].
-[color=green]Good against low health enemies[/color]
-[color=orange]Weak against crowds and tanky enemies[/color]"
+Charges at the nearest enemy, dealing [color=red]5 damage[/color] every [color=blue]0.5 seconds[/color].
+[color=green]Moves fast, good at picking off enemies[/color]
+[color=orange]Weak against crowds[/color]"
 
 [node name="ColorRect" type="ColorRect" parent="summon select/desc1"]
 layout_mode = 0
@@ -271,7 +271,7 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "Eye see all.
-Can snipe enemies from anywhere on the screen, dealing [color=red]15 damage[/color] with a somewhat slow cooldown. His laser can also pierce through multiple enemies.
+Can snipe enemies from anywhere on the screen, dealing [color=red]15 damage[/color] with a slow cooldown. His laser can also pierce through multiple enemies.
 [color=green]Good against enemies that have high health or are bunched together[/color]
 [color=orange]Weak against enemies that are spread out[/color]"
 
@@ -320,7 +320,7 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "MR. SUMMONER, GET DOWN!
-Rams into enemies, dealing [color=red]2 damage[/color] and [color=blue]pushing them away from you[/color].
+Rams into enemies, dealing [color=red]1 damage[/color] and [color=blue]pushing them away from you[/color].
 [color=green]Helps with crowd control so that you can collect crystals more safely[/color]
 [color=orange]Sluggish, can only move in 4 directions[/color]"
 

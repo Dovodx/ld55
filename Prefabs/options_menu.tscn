@@ -139,6 +139,40 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
+[node name="vsync label" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = 51.0
+offset_right = -24.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(214, 13)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]Enable Vsync:"
+scroll_active = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 314.0
+offset_right = 545.0
+offset_bottom = 354.0
+
+[node name="vsync checkbox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 310.0
+offset_right = 525.0
+offset_bottom = 334.0
+scale = Vector2(2, 2)
+
 [node name="toggle fullscreen button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -146,17 +180,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = 48.0
-offset_right = 50.0
-offset_bottom = 82.0
+offset_left = -119.0
+offset_top = 101.0
+offset_right = 119.0
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(50, 17)
 theme_override_font_sizes/font_size = 24
 text = "Toggle Fullscreen"
 
-[node name="exit button" type="Button" parent="."]
+[node name="back button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -164,16 +198,17 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = 93.0
+offset_top = 146.0
 offset_right = 50.0
-offset_bottom = 127.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(50, 17)
 theme_override_font_sizes/font_size = 24
-text = "Exit"
+text = "Back"
 
 [connection signal="value_changed" from="master volume slider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="sfx volume slider" to="." method="_on_sfx_volume_slider_value_changed"]
 [connection signal="value_changed" from="music volume slider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="toggled" from="vsync checkbox" to="." method="_on_vsync_checkbox_toggled"]
 [connection signal="pressed" from="toggle fullscreen button" to="." method="_on_toggle_fullscreen_button_pressed"]

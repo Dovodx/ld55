@@ -64,7 +64,7 @@ func _ready():
 	pauseMenu.get_node("resume").connect("pressed", unpauseGame)
 	pauseMenu.get_node("options").connect("pressed", openOptionsMenu)
 	pauseMenu.get_node("quit").connect("pressed", _on_quit_pressed)
-	optionsMenu.get_node("exit button").connect("pressed", closeOptionsMenu)
+	optionsMenu.get_node("back button").connect("pressed", closeOptionsMenu)
 	
 	hud.get_node("in-game").visible = true
 	hud.get_node("dead").visible = false

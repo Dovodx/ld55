@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 var speed = 500.0
 var hitSpeedThreshold = 0.5
-var damage = 2.0
-var stunTime = 0.5
+var damage = 1.0
+var stunTime = 0.25
 var pushForce = 250.0
 
 var sprite: Sprite2D
@@ -48,7 +48,7 @@ func _process(delta):
 	)
 
 func _physics_process(delta):
-	velocity *= 0.985
+	velocity *= 0.98
 	sprite.flip_h = velocity.x < 0
 	
 	if velocity.length() < speed * hitSpeedThreshold:

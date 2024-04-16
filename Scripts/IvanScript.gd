@@ -111,8 +111,7 @@ func find_new_target():
 	for enemy in get_node("/root/level/enemies").get_children():
 		if enemy.dead or !enemy.get_node("sprite root").visible:
 			continue
-		#try it out - target enemy closest to player, might be OP
-		var distance = player.global_position.distance_squared_to(enemy.global_position)
+		var distance = global_position.distance_squared_to(enemy.global_position)
 		if distance < lowestDistance:
 			lowestDistance = distance
 			newTarget = enemy

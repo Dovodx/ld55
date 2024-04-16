@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 500.0
-var damage = 1.0
+var damage = 5.0
 
 var sprite: Sprite2D
 var spriteRoot: Node2D

@@ -27,6 +27,8 @@ func spawn_enemy():
 	var enemyNum = randi_range(0, highestEnemyNum)
 	var enemyToSpawn = enemies[enemyNum].instantiate()
 	enemyToSpawn.global_position = get_point_away_from_player()
+	if levelNum > 12:
+		enemyToSpawn.damage *= 1 + (levelNum - 12) * 0.1 #Enemy damage increases after 2 minutes
 	get_tree().get_root().get_node("level/enemies").add_child(enemyToSpawn)
 
 func enemy_dead():
@@ -46,7 +48,7 @@ func stop_spawning():
 	levelTimer.stop()
 
 func respawn_crystals():
-	if get_node("/root/level/crystals").get_children().size() < 10 and (Global.crystalsCollected) / 30 > get_node("/root/level/crystals").get_children().size():
+	if get_node("/root/level/crystals").get_children().size() < 6 and (Global.crystalsCollected) / 30 > get_node("/root/level/crystals").get_children().size():
 		var newCrystal = get_node("/root/level/crystals").get_children()[0].duplicate()
 		get_node("/root/level/crystals").call_deferred("add_child", newCrystal)
 		
@@ -74,8 +76,9 @@ func get_point_away_from_player():
 	if flipy:
 		pos.y *= -1
 	
-	var xroll = randf_range(0.15, 0.45)
-	var yroll = randf_range(max(xroll, 0.3), 0.45)
+	var topOrSide = randi_range(0, 1)
+	var xroll = randf_range(0.2, 0.45) if topOrSide == 0 else randf_range(0.4, 0.45)
+	var yroll = randf_range(0.4, 0.45) if topOrSide == 0 else randf_range(0.2, 0.45)
 	pos.x *= 960 * xroll
 	pos.y *= 540 * yroll
 	pos += screenCenter

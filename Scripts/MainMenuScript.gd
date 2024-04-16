@@ -3,7 +3,7 @@ extends Node
 @export var level: PackedScene
 
 func _ready():
-	$"options_menu/exit button".connect("pressed", close_options)
+	$"options_menu/back button".connect("pressed", close_options)
 
 func close_options():
 	$options_bg.visible = false
